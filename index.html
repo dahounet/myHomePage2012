@@ -1,0 +1,964 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link href="style.css" rel="stylesheet" type="text/css">
+<script src="js/jquery-1.8.2.min.js"></script>
+</head>
+
+<body>
+<div class="header w">大猴的浏览器首页</div>
+<div class="main w">
+	<div class="lt" id="ltList">
+		<div class="contain">
+			<h1>事务列表<span>当前<em id="waitdonum">0</em>个待办</span></h1>
+			<ul id="workslist">
+				<!--<li>
+					<em class="prompt">提醒</em>
+					<a href="#" onClick="return false;">网站空间延期</a>
+				</li>
+				<li>
+					<a href="#" onClick="return false;">YY365互动</a>
+				</li>
+				<li>
+					<a href="#" onClick="return false;">PC蛋蛋商家问答</a>
+				</li>
+				<li>
+					<em class="prompt">提醒</em>
+					<span class="manager" title="删除本项事务" onClick="doC2(this.parentNode);">-</span>
+					<a href="#" onClick="return false;">其他测试试试事务</a>
+				</li>
+				<li>
+					<span class="manager" title="删除本项事务" onClick="doC2(this.parentNode);">-</span>
+					<a href="#" onClick="return false;">其他测试试试事务</a>
+				</li>
+				<li>
+					<span class="manager" title="删除本项事务" onClick="doC2(this.parentNode);">-</span>
+					<a href="#" onClick="return false;">其他测试试试事务</a>
+				</li>
+				<li>
+					<span class="manager" title="删除本项事务" onClick="doC2(this.parentNode);">-</span>
+					<a href="#" onClick="return false;">其他测试试试事务</a>
+				</li>
+				<li>
+					<em class="prompt">提醒</em>
+					<span class="manager" title="删除本项事务" onClick="doC2(this.parentNode);">-</span>
+					<a href="#" onClick="return false;">其他测试试试事务</a>
+				</li>
+				<li>
+					<span class="manager">
+						<a href="#" title="编辑事务" class="manager-modibtn">编辑事务</a>
+						<a href="#" title="删除事务" class="manager-delbtn" onClick="doC2(this.parentNode.parentNode);">删除事务</a>
+					</span>
+					<a href="#" onClick="return false;">其他测试试试事务12345678910000</a>
+				</li>
+				<li>
+					<em class="prompt">提醒</em>
+					<span class="manager" title="删除本项事务" onClick="doC2(this.parentNode);">-</span>
+					<a href="#" onClick="return false;">其他测试试试事务</a>
+				</li>
+				<li class="newadd" id="test">
+					<em class="prompt">提醒</em>
+					<span class="manager" title="删除本项事务" onClick="doC2(this.parentNode);">-</span>
+					<a href="#" onClick="return false;">超级特效测试</a>
+				</li>
+				<li class="add">
+					<a href="#" onClick="return false;">+ 添加新事务</a>
+				</li>-->
+			</ul>
+		</div>
+		<div class="wkctpanel">
+			<div class="ctcontain">
+			<a href="javascript:void(0);" class="ctbtn"><span class="addnew">+ 添加事务</span></a>
+			<a href="#" class="ctbtn"><span class="showall">显示全部</span></a>
+			<a href="javascript:void(0);" class="ctbtn" id="refreshWorksList"><span class="refresh">刷新</span></a>
+			</div>
+		</div>
+		<div class="conline" title="右缩" onClick="changeLeftList(this);"></div>
+	</div>
+	<div class="rt">
+		<ul id="workContent">
+			<li style="display:none;">
+				<div class="text">
+					<h1>事务内容</h1>
+					<div class="cnt">{#这里是具体的内容#}</div>
+				</div>
+			</li>
+			<li>
+				<div class="pceggs">
+					<div id="notLoggedIn">尚未登陆</div>		
+					<div id="accountInfo">尚未登录PC蛋蛋帐号，<a href="#" class="login JQ_login">[立即登录]</a><!--登陆帐户：<span><a href="#">60931111</a></span><a href="#" class="logout">[退出]</a>--></div>
+					<div class="answerPanel">
+						<div class="wrapper set" id="JQ_autoAnswerPanel">
+							<label><input type="checkbox" checked="checked" /><span>启用自动答题</span></label>
+							<div class="info">自动答题提示信息</div>
+							</div>
+						<div class="wrapper" id="JQ_subjectPanel">
+							<div class="finished">今日问题已全部回答完成！</div>
+							<h1>{#这里是题目名称#}<span class="multiple">多选</span>
+								<span style="display:none;" id="JQ_subjectOriginalText"></span>
+								<span class="quesInfo">本组第 1 题，共 5 题，共奖励 5000 金蛋。</span>
+							</h1>
+							<div class="choose" style="_display:none;">
+								<ul>
+									<li><label><input type="checkbox" /><img src="#" alt="" /></label></li>
+									<li><label><input type="checkbox" /><img src="#" alt="" /></label></li>
+									<li><label><input type="checkbox" /><img src="#" alt="" /></label></li>
+									<li><label><input type="checkbox" /><img src="#" alt="" /></label></li>
+								</ul>
+								<div class="c">
+									<button>提&nbsp;&nbsp;交</button>
+									<button disabled="disabled" class="processing"><span>正在提交...</span></button>
+									<a href="javascript:void(0);">[寻找答案]</a>
+								</div>
+							</div>
+							<div class="ts">
+								<div class="t">本题回答正确。</div>
+								<button>继续回答下一组题目/下一题/换题重答</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>我是4</li>
+		</ul>
+	</div>
+</div>
+<div class="footer">
+	<div class="verbox">
+		<div class="list">
+			<ul>
+				<li>
+					<strong>继续...</strong>
+					<div class="time">2012-06-03</div>
+					<div class="c">继续完善YY365结构，完成PC蛋蛋商家问答结构，完成左侧列表的伸缩功能。</div>
+				</li>
+				<li>
+					<strong>无题...</strong>
+					<div class="time">2012-06-02</div>
+					<div class="c">浮动提示泡泡调整美化、通用内容页、YY365....</div>
+				</li>
+				<li>
+					<strong>儿童节快乐，补上昨日更新记录</strong>
+					<div class="time">2012-06-01</div>
+					<div class="c">今日休息，下载安装试用Windows 8 Release Preview。</div>
+				</li>
+				<li>
+					<strong>按钮美化、对话框、浮动提示泡泡</strong>
+					<div class="time">2012-05-31</div>
+					<div class="c">制作完成通用的对话框窗口，同时完成了通用按钮的美化；制作了浮动提示泡泡，对其他细节进行了美化增强；对功能进行了新的构思。</div>
+				</li>
+				<li>
+					<strong>调整功能构思</strong>
+					<div class="time">2012-05-30</div>
+					<div class="c">构思：调整功能，增加通过后台程序实现的YY365互动、PC蛋蛋答题等功能。可行性测试：根据新调整的构思，对相关功能的具体实现进行了可行性测试，并根据测试结果对构思进行了相应的优化调整。</div>
+				</li>
+				<li>
+					<strong>细节增强、界面美化、动画效果</strong>
+					<div class="time">2012-05-29</div>
+					<div class="c">完成页脚栏“查看更新记录”功能，完成自由伸缩列表的功能增强与外观美化，整体界面颜色调整、边角圆角化、添加动画效果（不支持IE）。</div>
+				</li>
+				<li>
+					<strong>继续结构搭建</strong>
+					<div class="time">2012-05-28</div>
+					<div class="c">完成可自由伸缩列表的设计，完成固定页脚栏。</div>
+				</li>
+				<li>
+					<strong>开工</strong>
+					<div class="time">2012-05-27</div>
+					<div class="c">开始构思，并搭建基础页面结构。</div>
+				</li>
+			</ul>
+		</div>
+		<span class="t">查看更新记录<b></b></span>
+	</div>
+	制作：大猴 dahounet
+	<span id="abc"></span>
+	<!--<button onClick="doC1();">显示</button>
+	<script>
+	function doC1(t){
+		if(!t){
+			t=document.getElementById("test");
+		}
+		t.className='newadd2';
+		var c=function(){
+			t.className=null;
+		}
+		setTimeout(c,800);
+	}
+	function doC2(t){
+		if(!t){
+			t=document.getElementById("test");
+		}
+		t.className='newadd';
+		alert(t.id);
+	}
+	</script>
+	<button onClick="doC2();">隐藏</button>-->
+	<button onClick="t3(1);">打开对话框</button>
+	<button onClick="t4(1);">打开提示信息框</button>
+</div>
+
+<div id="workTip">
+	<div class="arrow1"></div>
+	<div class="wrapper">
+		<div class="loading">加载中...</div>
+		<h1>{#这里是事务的标题#}</h1>
+		<ul>
+			<li><span>事务类型：</span>每日事务</li>
+			<li><span>执行时间：</span><div class="r"><i>2012-05-31 00:00:00</i> 至 <i>2012-09-25 17:00:00</i></div></li>
+			<li><span>完成情况：</span><a href="javascript:void(0);" class="l" title="点击查看详细完成情况"><em>50/55</em>，完成率<em>95%</em></a></li>
+			<li><span>添加时间：</span><i>2012-05-31 10:59:21</i></li>
+			<li><span>详细说明：</span><div class="r">{#详细的说明呀#ssssssssssssssssssssssssssssssssssssssssssssssssssssfffffffffffffddddddddfff}</div></li>
+			<li><b>今日待完成</b></li>
+		</ul>
+	</div>
+	<div class="arrow2"></div>
+</div>
+<!--
+<div id="dialogBox">
+	<div class="box">
+		<div class="tit"><span>{#这是标题fffffffffffff}</span></div>
+		<div class="closeBtn" title="关闭对话框" onClick="t3();">X</div>
+		<div class="con"><p>{#这是具体内容是打飞机是富士康士蓝山咖啡裸四口裸四口}</p></div>
+		<div class="btn"><span><button>确定</button><button>取消</button><input type="button" value="111111" /></span></div>
+	</div>
+</div>
+-->
+<!--
+<div id="dialogBox">
+	<div class="box">
+		<div class="tit"><span>{事务的名称} - 完成情况日志</span></div>
+		<div class="closeBtn" title="关闭对话框" onClick="t3();">X</div>
+		<div class="con">
+			<table class="worklogs">
+				<tr class="head">
+					<th>日志序号</th>
+					<th>完成时间</th>
+					<th>完成人IP</th>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>2012-09-28 22:31:25</td>
+					<td>127.241.133.206</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>2012-09-28 22:31:25</td>
+					<td>127.241.133.206</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>2012-09-28 22:31:25</td>
+					<td>127.241.133.206</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>2012-09-28 22:31:25</td>
+					<td>127.241.133.206</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>2012-09-28 22:31:25</td>
+					<td>127.241.133.206</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>2012-09-28 22:31:25</td>
+					<td>127.241.133.206</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>2012-09-28 22:31:25</td>
+					<td>127.241.133.206</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>2012-09-28 22:31:25</td>
+					<td>127.241.133.206</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>2012-09-28 22:31:25</td>
+					<td>127.241.133.206</td>
+				</tr>
+				<tr class="pgbtn">
+					<td colspan="3">
+						<div class="pgbtn-wrap">
+							<a href="#" class="tn">上一页</a>
+							<span><a href="#">1</a></span>
+							<span><a href="#">2</a></span>
+							<span class="current">3</span>
+							<span><a href="#">4</a></span>
+							<span><a href="#">5</a></span>
+							<a href="#" class="tn disabled">下一页</a>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+-->
+<!---
+<div id="dialogBox">
+	<div class="box">
+		<div class="tit"><span>PC蛋蛋登陆</span></div>
+		<div class="closeBtn" title="关闭对话框" onClick="t3();">X</div>
+		<div class="con">
+			<div class="login">
+				<form method="post">
+					<ul class="login-form">
+						<li>
+							<div class="login-form-l">用户名:</div>
+							<div class="login-form-r"><input type="text" maxlength="25" /></div>
+						</li>
+						<li>
+							<div class="login-form-l">密码:</div>
+							<div class="login-form-r"><input type="password" maxlength="15" /></div>
+						</li>
+						<li>
+							<div class="login-form-l">验证码:</div>
+							<div class="login-form-r verifyCode">
+								<input type="text" maxlength="6" />
+								<div class="veriflyCode-img">
+									<img src="http://www.pceggs.com/VerifyCode_Login.aspx?id=1024165555" title="点击更换验证码" alt="点击更换验证码" />
+								</div>
+							</div>
+						</li>
+						<li class="login-form-btn">
+							<input type="submit" value="登 陆" />
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+-->
+<div id="dialogBox">
+	<div class="box">
+		<div class="tit"><span>PC蛋蛋登陆情况</span></div>
+		<div class="closeBtn" title="关闭对话框">X</div>
+		<div class="con">
+			<div class="login">
+					<ul class="login-form">
+						<li>
+							<div class="login-form-l">用户名:</div>
+							<div class="login-form-r"><input type="text" maxlength="25" disabled="disabled" value="sdsfddgdgg" /></div>
+						</li>
+						<li>
+							<div class="login-form-l">cookie:</div>
+							<div class="login-form-r">
+								<ol class="cookie-list">
+									<li>
+										<span class="n">ntst:</span><span class="v">298868-dd-441</span>
+									</li>
+									<li>
+										<span class="n">ntst:</span><span class="v">298868-dd-441</span>
+									</li>
+									<li>
+										<span class="n">ntst:</span><span class="v">298868-dd-441</span>
+									</li>
+								</ol>
+							</div>
+						</li>
+					</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="promptBox">
+	<div class="box">
+		<p>{#这是具体内容是飞机是富士康士蓝山咖啡裸四口裸四口}</p>
+		<p><span class="prompt-loading">数据加载中...</span></p>
+		<p><span class="prompt-complete">数据加载完成...</span></p>
+		<p><span class="prompt-error">数据加载出错...</span></p>
+	</div>
+</div>
+
+<!-- for IE<9 BS IE<9!!! -->
+<div class="P-forIE" style="">
+	<div class="content">
+		<div class="floater"></div>
+		<h1>抱歉，您所使用的浏览器不能正常显示本页面，请改用其他浏览器（如：IE9、谷歌浏览器、火狐浏览器等）访问。</h1>
+	</div>
+	<div class="bg"></div>
+</div>
+<script>
+function t3(c){
+	if(c){
+		document.getElementById("dialogBox").style.display="block";
+		setTimeout(function(){	document.getElementById("dialogBox").style.opacity="1";},0);
+	}else{
+		document.getElementById("dialogBox").style.opacity="0";
+		setTimeout(function(){	document.getElementById("dialogBox").style.display="none";},400);
+	}
+}
+function t4(c){
+		document.getElementById("promptBox").style.display="block";
+		setTimeout(function(){	document.getElementById("promptBox").style.opacity="1";},0);
+		setTimeout(function(){document.getElementById("promptBox").style.opacity="0";setTimeout(function(){	document.getElementById("promptBox").style.display="none";},400)},2000);
+}
+</script>
+<script src="js/common.js"></script>
+<script>
+//dialogWindow.show('<b>标题啊</b>','<b>测试啊啊啊啊啊</b>',function(){alert("测试啦");});
+
+(function(){
+	var firstDo=true;
+	var timer=false;
+	var autoAnswer=true;
+	function getAccountInfo(callback,closemsgid){
+		$.ajax({
+			type:"GET",
+			url:"works.php?ac=dowork&wid=6&wac=getAccountInfo",
+			dataType:"json",
+			timeout:15000,
+			beforeSend: function(){
+				//
+			},
+			success:function(data,textStatus){
+				if(data.errorInfo.no==null){
+					if(callback&&closemsgid!==null){
+						callback(data.result,closemsgid)
+					}else{
+						callback(data.result);
+					}
+				}else{
+					msgWindow.show({'html':'<p><span class="prompt-error">获取PC蛋蛋账户信息出错！（程序错误代码：'+data.errorInfo.no+' ['+data.errorInfo.text+']）</span></p>','time':2200,'callback':null,'level':21});
+				}
+			},
+			error:function(){
+				msgWindow.show({'html':'<p><span class="prompt-error">获取PC蛋蛋账户信息出错！</span></p>','time':2200,'callback':null,'level':21});
+			},
+			complete: function(){
+				//
+			}
+		});
+	}
+							
+	function setAccountInfo(accountInfo,closemsgid){
+		$("#accountInfo").html('登陆帐户：<span><a href="#" class="JQ_username" title="查看PC蛋蛋账户信息">'+accountInfo.username+'</a></span><a href="#" class="logout JQ_logout">[退出]</a>');
+		if(closemsgid){
+			msgWindow.close(closemsgid);
+		}
+		$("#accountInfo span a.JQ_username").click(function(e){
+			function foundHtml(o){
+				var temp="";
+				if(o.cookiesList!=null){
+					for(i=0;i<o.cookiesList.length;i++){
+						if(o.cookiesList[i].expire){
+							temp=temp+'<li><span class="n">'+o.cookiesList[i].name+'</span><span class="e">('+o.cookiesList[i].expire+' 到期)</span><span class="v">'+o.cookiesList[i].value+'</span></li>';
+						}else{
+							temp=temp+'<li><span class="n">'+o.cookiesList[i].name+'</span><span class="e">(无到期时间)</span><span class="v">'+o.cookiesList[i].value+'</span></li>';
+						}
+					}
+				}
+				temp='<div class="login accountInfo"><ul class="login-form"><li><div class="login-form-l">用户名:</div><div class="login-form-r"><input type="text" maxlength="25" disabled="disabled" value="'+o.username+'" /></div></li><li><div class="login-form-l">cookie:</div><div class="login-form-r"><ol class="cookie-list">'+temp+'</ol></div></li></ul></div>';
+				return temp;
+			}
+			dialogWindow.show('<b>查看PC蛋蛋账户信息</b>',foundHtml(accountInfo));
+			return false;
+		});
+		$("#accountInfo a.JQ_logout").click(function(e){
+			logout();
+			return false;
+		});
+	}
+	
+	function loadverifycode(t){
+		if($("#PCeggsloginForm .veriflyCode-img img").attr('src')==""){
+			$.ajax({
+				type:"GET",
+				url:"works.php?ac=dowork&wid=6&wac=retrieveRandomImg",
+				dataType:"json",
+				timeout:15000,
+				beforeSend: function(){
+					//
+				},
+				success:function(data,textStatus){
+					if(data.errorInfo.no==null){
+						$("#PCeggsloginForm .veriflyCode-img").css('display','block');
+						$("#PCeggsloginForm .veriflyCode-img img").attr('src',data.imgSrc);
+						$("#PCeggsloginForm .veriflyCode-img img").click(function(e){
+								loadverifycode(true);
+						});
+					}else{
+						msgWindow.show({'html':'<p><span class="prompt-error">获取PC蛋蛋验证码时出错！（程序错误代码：'+data.errorInfo.no+' ['+data.errorInfo.text+']）</span></p>','time':2200,'callback':null,'level':21});
+					}
+				},
+				error:function(){
+					msgWindow.show({'html':'<p><span class="prompt-error">获取PC蛋蛋验证码时出错！</span></p>','time':2200,'callback':null,'level':21});
+				},
+				complete: function(){
+					//
+				}
+			});
+		}else if(t==true){
+			$.ajax({
+				type:"GET",
+				url:"works.php?ac=dowork&wid=6&wac=retrieveRandomImg",
+				dataType:"json",
+				timeout:15000,
+				beforeSend: function(){
+					//
+				},
+				success:function(data,textStatus){
+					if(data.errorInfo.no==null){
+						$("#PCeggsloginForm .veriflyCode-img img").attr('src',data.imgSrc);
+						$("#PCeggsloginForm input[name='verifycode']").focus();
+					}else{
+						msgWindow.show({'html':'<p><span class="prompt-error">获取PC蛋蛋验证码时出错！（程序错误代码：'+data.errorInfo.no+' ['+data.errorInfo.text+']）</span></p>','time':2200,'callback':null,'level':21});
+					}
+				},
+				error:function(){
+					msgWindow.show({'html':'<p><span class="prompt-error">获取PC蛋蛋验证码时出错！</span></p>','time':2200,'callback':null,'level':21});
+				},
+				complete: function(){
+					//
+				}
+			});
+		}
+	}
+			
+	function checkStatus(){
+		function check(){
+			if(firstDo==true){
+				init();
+				firstDo=false;
+			}
+		}
+		$.ajax({
+			type:"GET",
+			url:"works.php?ac=dowork&wid=6&wac=checkStatus",
+			dataType:"json",
+			timeout:15000,
+			beforeSend: function(){
+				this.closemsgid=msgWindow.show({'html':'<p><span class="prompt-loading">检查PC蛋蛋帐号登陆状态中...</span></p>','time':8000,'callback':null,'level':10});
+			},
+			success:function(data,textStatus){
+				if(data.errorInfo.no==null){
+					if(data.result==true){
+						getAccountInfo(setAccountInfo,this.closemsgid);
+						check();
+					}else{
+						msgWindow.show({'html':'<p><span class="prompt-error">PC蛋蛋帐号尚未登陆，请登陆！</span></p>','time':1000,'callback':login,'level':21});
+						$("#accountInfo a.JQ_login").click(function(e){
+							login();
+							return false;
+						});
+						$("#notLoggedIn").show().next().nextAll().hide();
+					}
+				}else{
+					msgWindow.show({'html':'<p><span class="prompt-error">检查PC蛋蛋帐号登陆状态出错！（程序错误代码：'+data.errorInfo.no+' ['+data.errorInfo.text+']）</span></p>','time':2200,'callback':null,'level':21});
+				}
+			},
+			error:function(){
+				msgWindow.show({'html':'<p><span class="prompt-error">检查PC蛋蛋帐号登陆状态出错！</span></p>','time':2200,'callback':null,'level':21});
+			},
+			complete: function(){
+				//
+			}
+		})
+	}
+	
+	function logout(){
+		$.ajax({
+			type:"GET",
+			url:"works.php?ac=dowork&wid=6&wac=logout",
+			dataType:"json",
+			timeout:15000,
+			beforeSend: function(){
+				msgWindow.show({'html':'<p><span class="prompt-loading">正在退出PC蛋蛋帐号...</span></p>','time':8000,'callback':null,'level':10});
+			},
+			success:function(data,textStatus){
+				if(data.errorInfo.no==null){
+					msgWindow.show({'html':'<p><span class="prompt-complete">退出PC蛋蛋帐号成功！'+data.describe+'</span></p>','time':2200,'callback':null,'level':21});
+					$("#notLoggedIn").show().next().nextAll().hide();
+					$("#accountInfo").html('尚未登录PC蛋蛋帐号，<a href="#" class="login JQ_login">[立即登录]</a>');
+					clearTimeout(timer);
+					$("#accountInfo a.JQ_login").click(function(e){
+						login();
+						return false;
+					});
+				}else{
+					msgWindow.show({'html':'<p><span class="prompt-error">退出PC蛋蛋帐号时出错！（程序错误代码：'+data.errorInfo.no+' ['+data.errorInfo.text+']）</span></p>','time':2200,'callback':null,'level':21});
+				}
+			},
+			error:function(){
+				msgWindow.show({'html':'<p><span class="prompt-error">退出PC蛋蛋帐号时出错！</span></p>','time':2200,'callback':null,'level':21});
+			},
+			complete: function(){
+				//
+			}
+		});
+	}
+	function login(){
+		dialogWindow.show("PC蛋蛋账户登录",'<div class="login"><form method="post" id="PCeggsloginForm"><ul class="login-form"><li><div class="login-form-l">用户名:</div><div class="login-form-r"><input type="text" maxlength="25" name="username" /></div></li><li><div class="login-form-l">密码:</div><div class="login-form-r"><input type="password" maxlength="15" name="password" /></div></li><li><div class="login-form-l">验证码:</div><div class="login-form-r verifyCode"><input type="text" maxlength="6" name="verifycode" /><div class="veriflyCode-img"><img src="" title="点击更换验证码" alt="点击更换验证码" /></div></div></li><li class="login-form-btn"><input type="submit" value="登 陆" /></li></ul></form></div>');
+		getAccountInfo(callback);
+		function callback(r){
+			$("#PCeggsloginForm input[name='username']").val(r.username);
+		}
+		
+		$("#PCeggsloginForm").submit(function(e){
+			username=$("#PCeggsloginForm input[name='username']").val();
+			password=$("#PCeggsloginForm input[name='password']").val();
+			vcode=$("#PCeggsloginForm input[name='verifycode']").val();
+			if(username!=""&&password!=""){
+				$.ajax({
+					type:"GET",
+					url:"works.php?ac=dowork&wid=6&wac=login&uname="+username+"&pwd="+password+"&vcode="+vcode,
+					dataType:"json",
+					timeout:15000,
+					beforeSend: function(){
+						msgWindow.show({'html':'<p><span class="prompt-loading">PC蛋蛋帐号登陆登录中...</span></p>','time':8000,'callback':null,'level':10});
+					},
+					success:function(data,textStatus){
+						if(data.errorInfo.no==null){
+							if(data.result===true){
+								msgWindow.show({'html':'<p><span class="prompt-complete">登录PC蛋蛋帐号成功！帐号: '+data.username+'</span></p>','time':2200,'callback':null,'level':21});
+								checkStatus();
+								init();
+								dialogWindow.colse();
+							}else{
+								msgWindow.show({'html':'<p><span class="prompt-error">登录PC蛋蛋失败，请检查 帐号、密码、验证码 是否均输入正确！</span></p>','time':2200,'callback':function(){loadverifycode(true);},'level':21});
+							}
+						}else{
+							msgWindow.show({'html':'<p><span class="prompt-error">登录PC蛋蛋时出错！（程序错误代码：'+data.errorInfo.no+' ['+data.errorInfo.text+']）</span></p>','time':2200,'callback':function(){loadverifycode(true);},'level':21});
+						}
+					},
+					error:function(){
+						msgWindow.show({'html':'<p><span class="prompt-error"登录PC蛋蛋时出错！</span></p>','time':2200,'callback':function(){loadverifycode(true);},'level':21});
+					},
+					complete: function(){
+						//
+					}
+				});
+			}else{
+				msgWindow.show({'html':'<p><span class="prompt-error">用户名、密码均不能为空！</span></p>','time':1400,'callback':null,'level':10});
+			}
+			return false;
+		});
+		
+		$("#PCeggsloginForm input[name='verifycode']").focus(function(e){
+			loadverifycode();
+		});
+	}
+	
+	function loadASubject(adid,frombtn){
+		if(!frombtn){
+			var frombtn=false;
+		}else{
+			var frombtn=true;
+		}
+		if(!adid){
+			var url='works.php?ac=dowork&wid=6&wac=getq';
+		}else{
+			var url='works.php?ac=dowork&wid=6&wac=getq&adid='+adid;
+		}
+		
+		function foundHtml(result){
+			var html="";
+			
+			var formdata=result.formdata;
+			var temp='<form name="postdata" style="display:none;">';
+			for ( var p in formdata ){
+				if(p!='btnt'){
+					temp+='<input name="'+p+'" type="text" value="'+formdata[p]+'" />';
+				}else{
+					temp+='<input name="'+p+'" type="text" value="提 交" />';
+				}
+			}
+			temp+='</form>';
+			html+=temp;
+			
+			temp='<h1>问题： '+result.question.text;
+			if(result.question.multiple==true){
+				temp+='<span class="multiple">多选</span>';
+			}
+			temp+='<span style="display:none;" id="JQ_subjectOriginalText">'+result.question.originalText+'</span><span class="quesInfo">本组第 '+result.question.num+' 题，共 '+result.question.sum+' 题，共奖励 '+result.question.award+' 金蛋。</span></h1>';
+			html+=temp;
+			
+			temp='<div class="choose"><ul>';
+			for(var i=0;i<result.option.length;i++){
+				temp+='<li><label><input type="checkbox" value="'+result.option[i].optid+'" /><img src="'+result.option[i].opturl+'" alt="" /></label></li>';
+			}
+			temp+='</ul><div class="c"><button>提&nbsp;&nbsp;交</button><a href="'+result.lookforurl+'" target="_blank">[寻找答案]</a></div></div>';
+			html+=temp;
+			return html;
+		}
+		$.ajax({
+			type:"GET",
+			url:url,
+			dataType:"json",
+			timeout:15000,
+			beforeSend: function(){
+				$("#JQ_subjectPanel .ts button").attr('disabled','true').addClass('processing').html('<span>正在获取答题题目...</span>');
+			},
+			success:function(data,textStatus){
+				if(data.errorInfo.no==null&&data.result!=false){
+					if(data.result=='finished'){
+						$("#JQ_subjectPanel").html('<div class="finished">今日问题已全部回答完成！</div>');
+					}else{
+						$("#JQ_subjectPanel").attr('data-adid',data.result.adid);
+						$("#JQ_subjectPanel").html(foundHtml(data.result));
+						$("#JQ_subjectPanel .c button").click(function(e){
+							answer();
+						});
+						if(autoAnswer==true){
+							autoAnswerControl('get',function(){answer();});
+						}
+					}
+				}else{
+					$("#JQ_subjectPanel .ts button").removeAttr('disabled').removeClass('processing').html('重新获取答题题目');
+					msgWindow.show({'html':'<p><span class="prompt-error">获取答题题目时出错！</span></p>','time':2200,'callback':null,'level':21});
+				}
+			},
+			error:function(){
+				$("#JQ_subjectPanel .ts button").removeAttr('disabled').removeClass('processing').html('重新获取答题题目');
+				msgWindow.show({'html':'<p><span class="prompt-error">获取答题题目时出错！</span></p>','time':2200,'callback':null,'level':21});
+			},
+			complete: function(){
+				//
+			}
+		});
+	}
+	
+	function answer(){
+		var count=0;
+		for(var i=0;i<4;i++){
+			var f=$("#JQ_subjectPanel .choose ul input[type=checkbox]").eq(i);
+			if(f.attr("checked")){
+				count++;
+				$("#JQ_subjectPanel form[name=postdata] input[name=input_ANSWER"+(i+1)+"]").val(f.val());
+			}else{
+				$("#JQ_subjectPanel form[name=postdata] input[name=input_ANSWER"+(i+1)+"]").val('');
+			}
+		}
+		if(count==0){
+			msgWindow.show({'html':'<p><span class="prompt-error">请至少勾选一项答案！</span></p>','time':1400,'callback':null,'level':10});
+			return false;
+		}
+		function createQueryStr(){
+			var temp=new Array();
+			var target=$("#JQ_subjectPanel form[name=postdata] input");
+			var num=(target.toArray()).length;
+			for(var i=0;i<num;i++){
+				temp.push(target.eq(i).attr('name')+'='+encodeURIComponent(target.eq(i).val()));
+			}
+			temp.push('adid='+$("#JQ_subjectPanel").attr('data-adid'));
+			return temp.join('&');
+		}
+		function submit(){
+			$.ajax({
+				type:"POST",
+				url:'works.php?ac=dowork&wid=6&wac=answer',
+				data:createQueryStr(),
+				dataType:"json",
+				timeout:15000,
+				
+				beforeSend: function(){
+					$("#JQ_subjectPanel .choose div.c button").attr('disabled','true').addClass('processing').html('<span>正在提交...</span>');
+				},
+				success:function(data,textStatus){
+					if(data.errorInfo.no==null&&data.result!=false){
+						if(data.nextstep==0){
+							$("#JQ_subjectPanel").html('<div class="finished">今日问题已全部回答完成！</div>');
+						}else if(data.nextstep==1){
+							$("#JQ_subjectPanel").html('<div class="ts"><div class="t">本题回答正确！</div><button>继续回答本组下一题</button></div>');
+							$("#JQ_subjectPanel .ts button").click(function(e){
+								loadASubject(data.adid);
+							});
+							if(autoAnswer==true){
+								loadASubject(data.adid);
+							}
+						}else if(data.nextstep==2){
+							$("#JQ_subjectPanel").html('<div class="ts"><div class="t">本题回答正确！本组题目已回答完毕，已获得金蛋奖励。</div><button>继续回答下一组题目</button></div>');
+							$("#JQ_subjectPanel .ts button").click(function(e){
+								loadASubject();
+							});
+							if(autoAnswer==true){
+								loadASubject();
+							}
+						}else if(data.nextstep==3){
+							$("#JQ_subjectPanel").html('<div class="ts"><div class="t">本题回答错误！</div><button>更换题目，重新回答</button></div>');
+							$("#JQ_subjectPanel .ts button").click(function(e){
+								loadASubject(data.adid);
+							});
+							if(autoAnswer==true){
+								autoAnswerControl('correct',function(){loadASubject(data.adid);});
+							}
+						}
+					}else{
+						$("#JQ_subjectPanel .choose div.c button").removeAttr('disabled').removeClass('processing').html('重新提交');
+						msgWindow.show({'html':'<p><span class="prompt-error">提交答案时出错！</span></p>','time':2200,'callback':null,'level':21});
+					}
+				},
+				error:function(){
+					$("#JQ_subjectPanel .choose div.c button").removeAttr('disabled').removeClass('processing').html('重新提交');
+					msgWindow.show({'html':'<p><span class="prompt-error">提交答案时出错！</span></p>','time':2200,'callback':null,'level':21});
+				},
+				complete: function(){
+					//
+				}
+			});
+		}
+		if(autoAnswer==true){
+			autoAnswerControl('update',function(){submit();});
+		}else{
+			submit();
+		}
+		
+	}
+	
+	function autoAnswerControl(f,callback){
+		if(f=='correct'){
+			$.ajax({
+				type:"GET",
+				url:"works.php?ac=dowork&wid=6&wac=autoanswer&correct=true",
+				dataType:"json",
+				timeout:15000,
+				beforeSend: function(){
+					$("#JQ_autoAnswerPanel .info").html('正在准备清除题库中的错误答案...');
+				},
+				success:function(data,textStatus){
+					if(data.errorInfo.no==null&&data.result==true){
+						$("#JQ_autoAnswerPanel .info").html('错误答案已清除。(id='+data.id+')');
+						callback();
+					}else{
+						msgWindow.show({'html':'<p><span class="prompt-error">清除错误答案时出错！</span></p>','time':2200,'callback':null,'level':21});
+					}
+				},
+				error:function(){
+					msgWindow.show({'html':'<p><span class="prompt-error">清除错误答案时出错！</span></p>','time':2200,'callback':null,'level':21});
+				},
+				complete: function(){
+					//
+				}
+			});
+		}else{
+			function getOption(ck){
+				var temp=new Array();
+				for(var i=0;i<4;i++){
+					var f=$("#JQ_subjectPanel .choose ul input[type=checkbox]").eq(i);
+					if(ck==true){
+						if(f.attr("checked")){
+							temp.push(f.val());
+						}
+					}else{
+						temp.push(f.val());
+					}
+				}
+				return temp.join('|');
+			}
+			function setOption(r){
+				for(var i=0;i<r.length;i++){
+					console.log(r[i]);
+					$("#JQ_subjectPanel .choose ul input[value="+r[i]+"]").attr('checked','true');
+				}
+			}
+			if(f=='get'){
+				var text=$("#JQ_subjectOriginalText").text();
+				var option=getOption();
+				$.ajax({
+					type:"GET",
+					url:"works.php?ac=dowork&wid=6&wac=autoanswer&text="+text+"&option="+option,
+					dataType:"json",
+					timeout:15000,
+					beforeSend: function(){
+						$("#JQ_autoAnswerPanel .info").html('正在尝试获取本题答案...');
+					},
+					success:function(data,textStatus){
+						if(data.errorInfo.no==null&&data.result!=false){
+							if(data.action=='getOK'){
+								$("#JQ_autoAnswerPanel .info").html('已从题库中获取到本题答案。(id='+data.id+') 3秒后自动提交...');
+								setOption(data.result);
+								timer=setTimeout(function(){if($("#workContent").attr('currentworkid')==6){if(autoAnswer==true){callback();}}},3000);
+							}else if(data.action=='noAnswer'){
+								$("#JQ_autoAnswerPanel .info").html('题库中本题无答案，请手动回答本题。(id='+data.id+')');
+							}else if(data.action=='addnew'){
+								$("#JQ_autoAnswerPanel .info").html('题库中未找到相符题目，已自动添加至题库，请手动回答本题。');
+							}
+						}else{
+							msgWindow.show({'html':'<p><span class="prompt-error">尝试获取本题答案时出错！1</span></p>','time':2200,'callback':null,'level':21});
+						}
+					},
+					error:function(){
+						msgWindow.show({'html':'<p><span class="prompt-error">尝试获取本题答案时出错！2</span></p>','time':2200,'callback':null,'level':21});
+					},
+					complete: function(){
+						//
+					}
+				});
+			}else if(f=='update'){
+				var text=$("#JQ_subjectOriginalText").text();
+				var option=getOption();
+				var selectedOption=getOption(true);
+				$.ajax({
+					type:"GET",
+					url:"works.php?ac=dowork&wid=6&wac=autoanswer&text="+text+"&option="+option+"&selectedOption="+selectedOption,
+					dataType:"json",
+					timeout:15000,
+					beforeSend: function(){
+						$("#JQ_autoAnswerPanel .info").html('正在准备更新题目...');
+					},
+					success:function(data,textStatus){
+						if(data.errorInfo.no==null&&data.result==true&&data.action=='update'){
+							$("#JQ_autoAnswerPanel .info").html('指定题目已成功更新。(id='+data.id+')');
+							callback();
+						}else{
+							msgWindow.show({'html':'<p><span class="prompt-error">更新题目时出错！</span></p>','time':2200,'callback':null,'level':21});
+						}
+					},
+					error:function(){
+						msgWindow.show({'html':'<p><span class="prompt-error">更新题目时出错！</span></p>','time':2200,'callback':null,'level':21});
+					},
+					complete: function(){
+						//
+					}
+				});
+			}
+		}
+	}
+	function init(){	//初始化
+		//为各按钮绑定事件
+		$("#notLoggedIn").hide().next().nextAll().show();
+		
+		$("#JQ_autoAnswerPanel input").click(function(e){
+			if($("#JQ_autoAnswerPanel input").attr('checked')){
+				autoAnswer=true;
+				$("#JQ_autoAnswerPanel .info").text('自动答题提示信息').show('fast');
+				if($("#JQ_subjectOriginalText").html()){	//如果当前是答题界面，则开始自动答题
+					autoAnswerControl('get',function(){answer();});
+				}
+			}else{
+				autoAnswer=false;
+				$("#JQ_autoAnswerPanel .info").empty().hide('fast');
+			}
+		});
+		
+		//执行函数
+		loadASubject();
+	}
+	
+	
+	
+	//测试用入口
+	//setTimeout(function(){checkStatus()},3300);
+	//setTimeout(function(){login()},3300);
+})();
+
+
+
+$(document).ready(function() {
+	loadworkslist();
+	setTimeout(function(){setInterval(function(){loadworkslist('auto')},8000)},10000);
+});
+$("#refreshWorksList").click(function(){
+	refreshWorksList();
+});
+</script>
+</body>
+</html>
