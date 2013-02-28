@@ -295,7 +295,7 @@ $arr['js']=<<<'EOT'
 				},
 				success:function(data,textStatus){
 					if(data.errorInfo.no==null&&data.result!=null&&data.result.state=='ok'){
-						msgWindow.show({'html':'<p><span class="prompt-complete">迷你博客发送成功！</span></p>','time':2200,'callback':null,'level':21});
+						msgWindow.show({'html':'<p><span class="prompt-complete">迷你博客发送成功！</span></p>','time':800,'callback':null,'level':21});
 					}else{
 						msgWindow.show({'html':'<p><span class="prompt-error">迷你博客发送时出错！</span></p>','time':2200,'callback':null,'level':21});
 					}
