@@ -5,7 +5,7 @@ if($_GET['ac']=='wkcontent'){
 //这里放HTML代码
 $arr['html']=<<<"EOT"
 				<div class="yy365">
-					<div id="notLoggedIn">尚未登陆</div>
+					<div id="notLoggedIn">尚未登陆</div> 
 					<div id="accountInfo">尚未登录YY365帐号，<a href="#" class="login JQ_login">[立即登录]</a></div>
 					<div id="webSiteLinks"><a href="http://www.yy365.com/" target="_blank">YY365首页</a><a href="http://www.yy365.com/info!commentInfo.do" target="_blank">评论回复提示</a><a href="http://www.pceggs.com/Gain/Gnmain.aspx" target="_blank">[积分兑换金蛋]</a></div>
 					<div class="daka" id="JQ_TodayJF">
@@ -988,7 +988,7 @@ if($_GET['ac']=='dowork'){	//逻辑处理代码写这里
 					$return['result']=json_decode($result['body']);
 				}elseif($_GET['urlid']==2){
 					$return['result']=json_decode($result['body']);
-					if(!isset($return['result']->error)&&$return['result']->nowintegral>=50){//完成了事务
+					if(!isset($return['result']->error)&&$return['result']->nowintegral>0){//完成了事务
 						$item->complete($item->generate_complete_key());	//自动完成当前事务
 					}
 				}elseif($_GET['urlid']==3){
