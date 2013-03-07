@@ -988,7 +988,7 @@ if($_GET['ac']=='dowork'){	//逻辑处理代码写这里
 					$return['result']=json_decode($result['body']);
 				}elseif($_GET['urlid']==2){
 					$return['result']=json_decode($result['body']);
-					if(!isset($return['result']->error)&&$return['result']->nowintegral>0){//完成了事务
+					if(/*!isset($return['result']->error)&&*/$return['result']->nowintegral>0){//完成了事务
 						$item->complete($item->generate_complete_key());	//自动完成当前事务
 					}
 				}elseif($_GET['urlid']==3){
