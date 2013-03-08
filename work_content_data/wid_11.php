@@ -389,6 +389,10 @@ $arr['js']=<<<'EOT'
 	}
 	
 	function loadJF(){
+		function getDate(){
+			var d=new Date();
+			return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+		}
 		$.ajax({
 			type:"GET",
 			url:"works.php?ac=dowork&wid=11&wac=opurl&urlid=1",
@@ -403,9 +407,10 @@ $arr['js']=<<<'EOT'
 						$("#JQ_TodayJF span.no a").click(function(e){
 							getJF();
 						});
-					}else if(data.result.nowintegral>=50){	//已经领取了积分
+					}else if(data.result.nowintegral>=3){	//已经领取了积分
 						$("#JQ_TodayJF span").removeClass("no").html(data.result.nowintegral);
 						$("#JQ_TodayJF .totalScore").show().text('未兑换积分: '+data.result.inte);
+						$("#JQ_TodayJF").attr('data-date',getDate());
 					}else{
 						msgWindow.show({'html':'<p><span class="prompt-error">获取当前积分时发生未知错误！</span></p>','time':2200,'callback':null,'level':21});
 					}
@@ -423,7 +428,20 @@ $arr['js']=<<<'EOT'
 	}
 	
 	function getJF(){
-		if($("#JQ_TodayJF span").hasClass('no')){
+		function getDate(){
+			var d=new Date();
+			return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+		}
+		function compareDate(){
+			var old=$("#JQ_TodayJF").attr('data-date');
+			if(getDate()!=old){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		//if($("#JQ_TodayJF span").hasClass('no')){
+		if(compareDate()){
 			$.ajax({
 				type:"GET",
 				url:"works.php?ac=dowork&wid=11&wac=opurl&urlid=2",
@@ -440,6 +458,7 @@ $arr['js']=<<<'EOT'
 							msgWindow.show({'html':'<p><span class="prompt-complete">恭喜您！已成功领取今日积分: '+data.result.nowintegral+' (目前已积累 '+data.result.inte+' 积分未兑换为金蛋) 。</span></p>','time':3200,'callback':null,'level':21});
 							$("#JQ_TodayJF span").removeClass("no").html(data.result.nowintegral);
 							$("#JQ_TodayJF .totalScore").show().text('未兑换积分: '+data.result.inte);
+							$("#JQ_TodayJF").attr('data-date',getDate());
 						}else{
 							msgWindow.show({'html':'<p><span class="prompt-error">领取积分时发生未知错误！</span></p>','time':2200,'callback':null,'level':21});
 						}
@@ -988,7 +1007,7 @@ if($_GET['ac']=='dowork'){	//逻辑处理代码写这里
 					$return['result']=json_decode($result['body']);
 				}elseif($_GET['urlid']==2){
 					$return['result']=json_decode($result['body']);
-					if(/*!isset($return['result']->error)&&*/$return['result']->nowintegral>0){//完成了事务
+					if(!isset($return['result']->error)&&$return['result']->nowintegral>=3){//完成了事务
 						$item->complete($item->generate_complete_key());	//自动完成当前事务
 					}
 				}elseif($_GET['urlid']==3){
