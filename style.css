@@ -1019,6 +1019,7 @@ ol.cookie-list li .e{
 	text-align:right;
 	margin-right:10px;
 	font-size:12px;
+	text-indent:0;
 }
 .yy365 .hudong .blist ul{
 	border:1px solid #FFF;
@@ -1166,6 +1167,7 @@ ol.cookie-list li .e{
 	background-color:#f7f7f7;
 	-webkit-box-shadow:none;
 	overflow:visible;
+	-webkit-transition:all .2s ease-in;
 }
 .yy365 .hudong .clist li.replied{
 	background-color:#e2f7cd;

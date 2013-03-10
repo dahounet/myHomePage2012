@@ -7,7 +7,7 @@ $arr['html']=<<<"EOT"
 				<div class="yy365">
 					<div id="notLoggedIn">尚未登陆</div> 
 					<div id="accountInfo">尚未登录YY365帐号，<a href="#" class="login JQ_login">[立即登录]</a></div>
-					<div id="webSiteLinks"><a href="http://www.yy365.com/" target="_blank">YY365首页</a><a href="http://www.yy365.com/info!commentInfo.do" target="_blank">评论回复提示</a><a href="http://www.pceggs.com/Gain/Gnmain.aspx" target="_blank">[积分兑换金蛋]</a></div>
+					<div id="webSiteLinks"><a href="http://www.yy365.com/" target="_blank">YY365首页</a><a href="http://www.yy365.com/info!commentInfo.do" target="_blank">评论回复提示列表</a><a href="http://www.pceggs.com/Gain/Gnmain.aspx" target="_blank">[积分兑换金蛋]</a></div>
 					<div class="daka" id="JQ_TodayJF">
 						<div class="score">今日积分<span class="no"><a href="#">[立即领取]</a></span></div>
 						<div class="totalScore">当前总积分:--</div>
@@ -23,7 +23,7 @@ $arr['html']=<<<"EOT"
 					<div class="clr"></div>
 					<div class="hudong">
 						<div class="blist" id="JQ_BlogList">
-							<div class="hl">评论回复提示<a href="javascript:void(0);">[全部忽略]</a><a href="javascript:void(0);">刷新</a></div>
+							<div class="hl">评论回复提示列表<a href="javascript:void(0);">[全部忽略]</a><a href="javascript:void(0);">刷新</a></div>
 							<div class="loading">加载中...</div>
 							<ul>
 							</ul>
@@ -31,7 +31,7 @@ $arr['html']=<<<"EOT"
 						<div class="clist" id="JQ_MiniBlog">
 							
 							<div class="loading" style="display:none;">加载中...</div>
-							<div class="notLoaded">请在左侧“评论回复提示”中单击一条迷你博客的[查看]。</div>
+							<div class="notLoaded">请在左侧“评论回复提示列表”中单击一条迷你博客的[查看]。</div>
 						</div>
 						<div class="clr"></div>
 					</div>
@@ -476,6 +476,18 @@ $arr['js']=<<<'EOT'
 		}
 	}
 	
+	
+	//声明变量
+	var isLoadingMiniBlog=false;	//用于指示当前是否有一个迷你博客正在加载中，FSALSE为没有正在加载，True为有。
+	
+	function setIsLoadingMiniBlog(c){
+		if(c=='NO'){
+			isLoadingMiniBlog=false;
+		}else if(c=='LOADING'){
+			isLoadingMiniBlog=true;
+		}
+	}
+	
 	function getMiniBlogList(){
 		
 		function generateHtml(t){
@@ -488,7 +500,7 @@ $arr['js']=<<<'EOT'
 			if(t.length>0){
 				return tempArr.join("\n");
 			}else{
-				return '<li class="noMiniBlogList">目前“评论回复提示”为空</li>';
+				return '<li class="noMiniBlogList">目前“评论回复提示列表”为空</li>';
 			}
 		}
 		$.ajax({
@@ -506,15 +518,17 @@ $arr['js']=<<<'EOT'
 					$("#JQ_BlogList .loading").hide();
 					$("#JQ_BlogList ul").show().html(generateHtml(t));
 					$("#JQ_BlogList ul li a").click(function(){
-						showMiniBlog($(this).parent().attr('cid'));
+						if(isLoadingMiniBlog==false){
+							showMiniBlog($(this).parent().attr('cid'));
+						}
 					});
 				}else{
 					$("#JQ_BlogList .loading").hide();
-					msgWindow.show({'html':'<p><span class="prompt-error">获取评论回复提示时出错！</span></p>','time':2200,'callback':null,'level':21});
+					msgWindow.show({'html':'<p><span class="prompt-error">获取评论回复提示列表时出错！</span></p>','time':2200,'callback':null,'level':21});
 				}
 			},
 			error:function(){
-				msgWindow.show({'html':'<p><span class="prompt-error">获取评论回复提示时出错！</span></p>','time':2200,'callback':null,'level':21});
+				msgWindow.show({'html':'<p><span class="prompt-error">获取评论回复提示列表时出错！</span></p>','time':2200,'callback':null,'level':21});
 			},
 			complete: function(){
 				//
@@ -562,6 +576,7 @@ $arr['js']=<<<'EOT'
 	var autoReplyTimer=null;
 	
 	function getMiniBlog(mid,callback){
+		setIsLoadingMiniBlog('LOADING');
 		function getContent(mid,callback){
 			$.ajax({
 				type:"GET",
@@ -583,11 +598,13 @@ $arr['js']=<<<'EOT'
 							getCommentList(mid);
 						}
 					}else{
+						setIsLoadingMiniBlog('NO');
 						$("#JQ_MiniBlog .loading").hide().siblings().remove();
 						msgWindow.show({'html':'<p><span class="prompt-error">获取迷你博客内容时出错！</span></p>','time':2200,'callback':null,'level':21});
 					}
 				},
 				error:function(){
+					setIsLoadingMiniBlog('NO');
 					$("#JQ_MiniBlog .loading").hide().siblings().remove();
 					msgWindow.show({'html':'<p><span class="prompt-error">获取迷你博客内容时出错！</span></p>','time':2200,'callback':null,'level':21});
 				},
@@ -664,7 +681,7 @@ $arr['js']=<<<'EOT'
 					msgWindow.show({'html':'<p><span class="prompt-error">获取迷你博客评论时出错！JQ ERROR</span></p>','time':2200,'callback':null,'level':21});
 				},
 				complete: function(){
-					//
+					setIsLoadingMiniBlog('NO');
 				}
 			});
 		}
@@ -768,6 +785,8 @@ $arr['js']=<<<'EOT'
 							}else{
 								html='<span class="prq">+'+data.result.score+' 人气</span>';
 							}
+							$("#JQ_MiniBlog ul").animate({scrollTop:$('#JQ_MiniBlog ul li[commentid='+commentid+']').index()*29},200);
+							//$("#JQ_MiniBlog ul").scrollTop($('#JQ_MiniBlog ul li[commentid='+commentid+']').index()*29);
 							$(html).insertBefore('#JQ_MiniBlog ul li[commentid='+commentid+'] div.cnt');
 							$('#JQ_MiniBlog ul li[commentid='+commentid+']').addClass('ok').attr("replied","yes");
 							$('#JQ_MiniBlog ul li[commentid='+commentid+'] input[type="radio"]').attr("disabled","disabled");
@@ -874,10 +893,12 @@ $arr['js']=<<<'EOT'
 				success:function(data,textStatus){
 					if(data.errorInfo.no==null&&data.result!=null){
 						if(data.result.error==null){
-							$('#JQ_BlogList ul li[cid='+id+']').remove();
-							if($('#JQ_BlogList ul li').length==0){
-								reloadMiniBlogList();
-							}
+							$('#JQ_BlogList ul li[cid='+id+']').hide("normal",function(){
+								$(this).remove();
+								if($('#JQ_BlogList ul li').length==0){
+									reloadMiniBlogList();
+								}
+							});
 							//console.log('移除成功'+id);
 						}
 					}else{
