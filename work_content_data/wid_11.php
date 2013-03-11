@@ -27,6 +27,7 @@ $arr['html']=<<<"EOT"
 							<div class="loading">加载中...</div>
 							<ul>
 							</ul>
+							<div class="autoStartReply"><label><input type="checkbox" checked="checked" /><span>点击“[查看]”后，自动开始回复迷你博客的评论</span></label></div>
 						</div>
 						<div class="clist" id="JQ_MiniBlog">
 							
@@ -912,6 +913,10 @@ $arr['js']=<<<'EOT'
 					//
 				}
 			});
+			
+			if($("#JQ_BlogList .autoStartReply input[type='checkbox']").attr("checked")=="checked"){
+				controlAutoReply();
+			}
 		});
 	}
 	

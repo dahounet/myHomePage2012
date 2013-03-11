@@ -1024,7 +1024,7 @@ ol.cookie-list li .e{
 .yy365 .hudong .blist ul{
 	border:1px solid #FFF;
 	box-sizing:border-box;
-	height:361px;
+	height:335px;
 	overflow-y:scroll;
 }
 .yy365 .hudong .blist li{
@@ -1060,6 +1060,18 @@ ol.cookie-list li .e{
 	float:right;
 	margin-right:10px;
 	font-size:12px;
+}
+.yy365 .hudong .blist .autoStartReply{
+	height:25px;
+	line-height:25px;
+	font-size:12px;
+	text-indent:0.3em;
+	border-top:1px solid #dadada;
+	background-color:#f0f0f0;
+}
+.yy365 .hudong .blist .autoStartReply input[type="checkbox"] {
+	vertical-align: middle;
+	margin-top: -1px;
 }
 .yy365 .hudong .clist{
 	width:62%;
