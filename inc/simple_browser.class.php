@@ -64,14 +64,14 @@ class browser {
 		$fstat = fstat ( $fp );
 		$this->configFileLastModTime = $fstat ['mtime'];
 		
-		//删除无用的cookie（到期的cookie、超过指定时间的无到期时间的cookie）
+		//删除无用的cookie（到期的cookie、超过指定时间的session cookie）
 		$oldCookiesArr = $this->getAllCookies ();
 		for($i = 0; $i < count ( $oldCookiesArr ); $i ++) {
-			if ($oldCookiesArr [$i] ['expire'] == null) { //如果到期时间不存在，则
-				if (time () - $this->configFileLastModTime > 7200) { //如果配置文件的修改时间距离现在已经超过了2小时，则将无到期时间的cookie删除掉
+			if ($oldCookiesArr [$i] ['expire'] == 'session') { //如果是session cookie，则
+				if (time () - $this->configFileLastModTime > 7200) { //如果配置文件的修改时间距离现在已经超过了2小时，则将session cookie删除掉
 					unset ( $this->configArr ['[cookies]'] [$oldCookiesArr [$i] ['name']] );
 				}
-			} else { //如果到期时间存在，则判断是否已到期
+			} else { //如果不是session cookie，则判断是否已到期
 				if ($oldCookiesArr [$i] ['expire'] < time ()) { //如果已到期，则将其删除
 					unset ( $this->configArr ['[cookies]'] [$oldCookiesArr [$i] ['name']] );
 				}
@@ -133,12 +133,8 @@ class browser {
 	}
 	
 	//设置指定的cookie
-	function setCookie($cn, $cv, $ce = null) { //cookie名，cookie值，cookie过期时间（无过期时间则为随浏览器关闭而自动删除的cookie）
-		if ($ce != null) {
-			$this->configArr ['[cookies]'] [$cn] = $cv . "\t" . $ce;
-		} else {
-			$this->configArr ['[cookies]'] [$cn] = $cv;
-		}
+	function setCookie($cn, $cv, $cdomain='-', $cpath='/', $ce = 'session', $csecure = 0) { //cookie名，cookie值，cookie生效域名，cookie生效路径，cookie过期时间（session则为随浏览器关闭而自动删除的cookie），cookie是否为https专用（默认不是）
+		$this->configArr ['[cookies]'] [$cn] = $cv . "\t" . $cdomain . "\t" . $cpath . "\t" . $ce . "\t" . $csecure;
 	}
 	
 	function getUserName() {
@@ -151,9 +147,10 @@ class browser {
 			$cArr = explode ( "\t", $this->configArr ['[cookies]'] [$cn] );
 			$r ['cn'] = $cn;
 			$r ['cv'] = $cArr [0];
-			if (count ( $cArr ) > 1) {
-				$r ['ce'] = $cArr [1];
-			}
+			$r ['cd'] = $cArr [1];
+			$r ['cp'] = $cArr [2];
+			$r ['ce'] = $cArr [3];
+			$r ['cs'] = $cArr [4];
 			return $r;
 		} else {
 			return FALSE;
@@ -167,9 +164,10 @@ class browser {
 				$temp = $this->getCookie ( $key );
 				$str [$i] ['name'] = $temp ['cn'];
 				$str [$i] ['value'] = $temp ['cv'];
-				if ($temp ['ce'] != null) {
-					$str [$i] ['expire'] = $temp ['ce'];
-				}
+				$str [$i] ['domain'] = $temp ['cd'];
+				$str [$i] ['path'] = $temp ['cp'];
+				$str [$i] ['expire'] = $temp ['ce'];
+				$str [$i] ['secure'] = $temp ['cs'];
 				$i ++;
 			}
 			return $str;
@@ -194,41 +192,88 @@ class browser {
 			return - 1;
 		}
 	}
-	
-	private function createCookieStr($cookieArr, $_this) { //创建cookie串，从配置文件中读取，准备发送
+	private function checkCookie($cArr,$url){	//检查cookie是否与指定的域名信息相符
+		$url=strtolower($url);
+			
+		$cArr['cs']?$protocol='https':$protocol='http';
+		if(parse_url ( $url,PHP_URL_SCHEME )!=$protocol){
+			return false;
+		}
+		if(ltrim($cArr['cd'],'.')==$cArr['cd']){	//如果cookie中的域名不是以.开头的，则
+			
+			$pointCount=substr_count($cArr['cd'],'.');
+			if($pointCount>1){	//如果cookie中的域名中含有超过1个.号，则
+				if($cArr['cd']!=parse_url ( $url,PHP_URL_HOST )){	//如果域名不相等
+					return false;
+				}
+			}
+			if($pointCount==1){	//如果cookie中的域名中含有1个.号，则
+				$host=parse_url ( $url,PHP_URL_HOST );
+				$pos=strrpos ( $host, $cArr['cd'] );
+				if($pos===FALSE || $pos+strlen($cArr['cd'])!=strlen($host)){
+					return false;
+				}
+			}
+		}else{	//否则如果是以.开头的
+			$host=parse_url ( $url,PHP_URL_HOST );
+			$pos=strrpos ( $host, ltrim($cArr['cd'],'.'));
+			if($pos===FALSE || $pos+strlen($cArr['cd'])-1!=strlen($host)){
+				return false;
+			}
+		}
+		if($cArr['cp']!='/' && strpos(parse_url ( $url,PHP_URL_PATH ),$cArr['cp'])!==0){
+			return false;
+		}
+		return true;
+	}
+	private function createCookieStr($cookieArr, $url) { //创建cookie串，从配置文件中读取，准备发送
 		foreach ( $cookieArr as $key => $value ) {
-			$temp = $_this->getCookie ( $key );
-			$str [] = $temp ['cn'] . '=' . $temp ['cv'];
+			$temp = $this->getCookie ( $key );
+			if($this->checkCookie($temp,$url)==true){	//如果cookie与指定的域名信息相符
+				$str [] = $temp ['cn'] . '=' . $temp ['cv'];
+			}
 		}
 		return implode ( '; ', $str );
 	}
 	
-	private function saveCookies($cookieArr, $_this) { //从返回的数据中获取cookies，并保存至配置文件中
+	private function saveCookies($cookieArr, $url, $_this) { //从返回的数据中获取cookies，并保存至配置文件中
 		$i2 = 0;
 		
 		while ( $cookieArr [$i2] ) {
 			$temp = explode ( ";", $cookieArr [$i2] );
+			
+			$value='';
+			$exp='session';
+			$domain=null;
+			$secure=0;
+			$path='/';
+			
 			$i = 0;
 			while ( $temp [$i] ) {
 				$temp2 = explode ( "=", trim ( $temp [$i] ), 2 );
 				if (strtolower ( $temp2 [0] ) == 'expires') {
-					$exp = strtotime ( $temp2 [1] );
+					$exp = strtotime ( trim ( $temp2 [1]) );
+				} elseif (strtolower ( $temp2 [0] ) == 'domain'){
+					$domain = strtolower ( trim ( $temp2 [1]) );
+				} elseif (strtolower ( $temp2 [0] ) == 'secure'){
+					$secure = 1;
+				} elseif (strtolower ( $temp2 [0] ) == 'path'){
+					$path = strtolower ( trim ( $temp2 [1]) );
 				} elseif ($i == 0) {
 					$name = $temp2 [0];
 					$value = $temp2 [1];
 				}
 				$i ++;
 			}
-			if (isset ( $name ) && isset ( $value )) {
-				if (isset ( $exp )) {
-					if (time () > $exp) {
-						$_this->deleteCookie ( $name );
-					} else {
-						$_this->setCookie ( $name, $value, $exp );
-					}
-				} else {
-					$_this->setCookie ( $name, $value );
+			if($domain==null){
+				$domain=parse_url($url,PHP_URL_HOST);
+			}
+			
+			if (isset ( $name )) {
+				if ($exp!='session' && time () > $exp) {	//如果设置了过期时间，并且当前时间大于过期时间，则说明该cookie已过期，须执行删除
+					$_this->deleteCookie ( $name );
 				}
+				$_this->setCookie ( $name, $value,$domain,$path,$exp,$secure);
 			}
 			$i2 ++;
 		}
@@ -281,7 +326,9 @@ class browser {
 				array_push ( $result ['headerArr'], trim ( $matchArr [0] [$i] ) );
 			}
 		}
-		
+		/*echo $resource;
+		print_r($matchArr);
+		print_r($result ['cookiesArr']);*/
 		if(strpos($result ['info']['content_type'], 'image')!==false){	//如果文件类型是图片，则进行BASE64转码
 			$result ['body'] = base64_encode( substr ( $resource, $info ['header_size'] ));
 		}elseif(strpos($result ['info']['content_type'], 'text')!==false){	//如果文件类型是文本，则转换为UTF-8编码
@@ -295,7 +342,7 @@ class browser {
 	//打开指定的URL，并自动加入cookies、保存返回的cookies，然后返回收到的数据
 	function openUrl($url, $method, $postValueArr = array(),$referrer=null) { //$postValueArr必须是一个关联数组，如 array("p1"=>'value') 表示 p1=value
 		if (count ( $this->configArr ['[cookies]'] ) > 0) {
-			$cookieStr = $this->createCookieStr ( $this->configArr ['[cookies]'], $this );
+			$cookieStr = $this->createCookieStr ( $this->configArr ['[cookies]'], $url );
 		} else {
 			$cookieStr = '';
 		}
@@ -319,12 +366,13 @@ class browser {
 		}
 		
 		if (count ( $result ['cookiesArr'] ) > 0) {
-			$this->saveCookies ( $result ['cookiesArr'], $this );
+			$this->saveCookies ( $result ['cookiesArr'], $url, $this );
 		}
 		//保存所有的配置数据至配置文件中
 		if (! $this->writeConfigFile ()) {
 			return FALSE;
 		}
+		//print_r($result);
 		return $result;
 	}
 }
