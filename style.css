@@ -1370,10 +1370,95 @@ ol.cookie-list li .e{
 }
 
 
-
-
-
-
+.rt ul .jsvip{
+	margin:30px 35px;
+}
+.jsvip .setPanel{
+	padding:8px 15px;
+	margin-top:30px;
+	box-sizing:border-box;
+	border:1px solid #dadada;
+	background-color:#ebebeb;
+	border-radius:3px;
+	box-shadow:rgba(255,255,255,.3) 0 0 0 1px inset;
+	font-size:12px;
+}
+.jsvip .setPanel input[type="checkbox"]{
+	vertical-align: middle;
+	margin-top: -1px;
+}
+.jsvip .getJinMi{
+	float:left;
+	width:30%;
+	height:161px;
+	margin-top:10px;
+	margin-right:3%;
+	box-sizing:border-box;
+	border:1px solid #dadada;
+	background-color:#ebebeb;
+	border-radius:3px;
+	box-shadow:rgba(255,255,255,.3) 0 0 0 1px inset;
+	overflow: hidden;
+}
+.jsvip .getJinMi h1{
+	font-size:14px;
+	margin:0;
+	text-indent:10px;
+	font-weight:bold;
+	height:30px;
+	line-height:30px;
+	border-bottom:1px solid #DADADA;
+	background-color:#F0F0F0;
+	box-shadow:rgba(255, 255, 255, .3) 0 0 0 1px inset;
+	overflow:hidden;
+	text-shadow:rgba(255,255,255,1) 0 -1px 0;
+}
+.jsvip .getJinMi .jmState{
+	height:130px;
+	background-color:#FFF;
+}
+.jsvip .getJinMi .jmSign{
+	text-align:center;
+}
+.jsvip .getJinMi .jmSign button{
+	margin-top:40px;
+	height:40px;
+	width:140px;
+}
+.jsvip .getJinMi .jmScore{
+	text-align:center;
+}
+.jsvip .getJinMi .signed .signedText{
+	padding-top:50px;
+}
+.jsvip .getJinMi .signedScore{
+	padding-top:35px;
+	font-size:22px;
+	color:#F39700;
+	text-shadow:rgba(204,204,204,.5) 1px 1px 0;
+}
+.jsvip .getJinMi .signedText{
+	padding-top:10px;
+}
+.jsvip .getJinMi .signedText span{
+	padding:2px 8px;
+	background-color:#090;
+	border-radius:3px;
+	color:#fff;
+	box-shadow:rgba(51,153,0,.4) 0 1px 2px 1px;
+	text-shadow:rgba(0,0,0,.5) 0 1px 0;
+}
+.jsvip .getJinMi .signing{
+	padding-top:50px;
+	text-align:center;
+	font-size:14px;
+}
+.jsvip .getJinMi .signing span{
+	padding:4px 8px;
+	background-color:#FFC;
+	border:1px solid #FC0;
+	border-radius:3px;
+}
 
 
 

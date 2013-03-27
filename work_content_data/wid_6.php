@@ -187,7 +187,7 @@ $arr['js']=<<<'EOT'
 				msgWindow.show({'html':'<p><span class="prompt-loading">正在退出PC蛋蛋帐号...</span></p>','time':8000,'callback':null,'level':10});
 			},
 			success:function(data,textStatus){
-				if(data.errorInfo.no==null){
+				if(data.result===true){
 					msgWindow.show({'html':'<p><span class="prompt-complete">退出PC蛋蛋帐号成功！'+data.describe+'</span></p>','time':2200,'callback':null,'level':21});
 					$("#notLoggedIn").show().next().nextAll().hide();
 					$("#accountInfo").html('尚未登录PC蛋蛋帐号，<a href="#" class="login JQ_login">[立即登录]</a>');
@@ -786,14 +786,11 @@ if($_GET['ac']=='dowork'){	//逻辑处理代码写这里
 		}elseif($_GET['wac']=='logout'){	//如果是退出
 			$result=$SE->openUrl("http://www.pceggs.com/Logout.aspx","GET");
 			if($result['info']['http_code']==302){	//退出成功
-				if($r>=0){
-					$return['result']=true;
-					$return['describe']='已成功退出PC蛋蛋帐号 '.$SE->getUserName();
-				}else{
-					$errorInfo['no']=300;
-				}
+				$return['result']=true;
+				$return['describe']='已成功退出PC蛋蛋帐号 '.$SE->getUserName();
 			}else{
-				$return['result']=FALSE;	//退出失败
+				$errorInfo['no']=300;	//退出失败
+				$return['result']=FALSE;
 			}
 		}elseif($_GET['wac']=='retrieveRandomImg'){	//如果是获取验证码图片
 			$result=$SE->openUrl("http://www.pceggs.com/VerifyCode_Login.aspx","GET");

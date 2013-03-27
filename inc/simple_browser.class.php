@@ -140,6 +140,11 @@ class browser {
 	function getUserName() {
 		return $this->configArr ['[user]'] ['uname'];
 	}
+	
+	function getUserPassword() {
+		return $this->configArr ['[user]'] ['pwd'];
+	}
+	
 	//获取指定的cookie的值和过期时间，返回数组
 	function getCookie($cn) {
 		$r = array ();
@@ -233,6 +238,9 @@ class browser {
 				$str [] = $temp ['cn'] . '=' . $temp ['cv'];
 			}
 		}
+		if(count($str)<1){
+			return '';
+		}
 		return implode ( '; ', $str );
 	}
 	
@@ -256,12 +264,12 @@ class browser {
 				} elseif (strtolower ( $temp2 [0] ) == 'domain'){
 					$domain = strtolower ( trim ( $temp2 [1]) );
 				} elseif (strtolower ( $temp2 [0] ) == 'secure'){
-					$secure = 1;
+					$secure = "secure";
 				} elseif (strtolower ( $temp2 [0] ) == 'path'){
 					$path = strtolower ( trim ( $temp2 [1]) );
 				} elseif ($i == 0) {
-					$name = $temp2 [0];
-					$value = $temp2 [1];
+					$name = trim ( $temp2 [0]);
+					$value = trim ( $temp2 [1]);
 				}
 				$i ++;
 			}
@@ -270,10 +278,11 @@ class browser {
 			}
 			
 			if (isset ( $name )) {
-				if ($exp!='session' && time () > $exp) {	//如果设置了过期时间，并且当前时间大于过期时间，则说明该cookie已过期，须执行删除
+				if (strlen($value)==0||($exp!='session' && time () > $exp)) {	//如果此cookie的值为空，或者设置了过期时间且当前时间大于过期时间，则须执行删除
 					$_this->deleteCookie ( $name );
+				}else{
+					$_this->setCookie ( $name, $value,$domain,$path,$exp,$secure);
 				}
-				$_this->setCookie ( $name, $value,$domain,$path,$exp,$secure);
 			}
 			$i2 ++;
 		}
@@ -288,7 +297,9 @@ class browser {
 		curl_setopt ( $ch, CURLOPT_URL, $url );
 		curl_setopt ( $ch, CURLOPT_TIMEOUT, 10 );
 		curl_setopt ( $ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.2) AppleWebKit/535.12 (KHTML, like Gecko) Maxthon/3.0 Chrome/18.0.966.0 Safari/535.12' );
-		
+
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,  FALSE);
 
 		if ($cookieStr != null) {
 			curl_setopt ( $ch, CURLOPT_COOKIE, $cookieStr );
