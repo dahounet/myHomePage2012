@@ -1459,6 +1459,23 @@ ol.cookie-list li .e{
 	border:1px solid #FC0;
 	border-radius:3px;
 }
+.jsvip .vippage{
+	float:left;
+	clear:both;
+	margin-top:20px;
+	width:99%;
+	height:570px;
+	box-sizing:border-box;
+	border:1px solid #dadada;
+	background-color:#ebebeb;
+	border-radius:3px;
+	box-shadow:rgba(255,255,255,.3) 0 0 0 1px inset;
+	overflow:hidden;
+}
+.jsvip .vippage iframe{
+	margin-bottom:-4px;
+	background-color:#FFF;
+}
 
 
 

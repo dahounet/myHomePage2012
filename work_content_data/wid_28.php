@@ -7,7 +7,7 @@ $arr['html']=<<<"EOT"
 				<div class="jsvip">
 					<div id="notLoggedIn">尚未登陆</div> 
 					<div id="accountInfo">尚未登录金山会员帐号，<a href="#" class="login JQ_login">[立即登录]</a></div>
-					<div id="webSiteLinks"><a href="http://vip.ijinshan.com/" target="_blank">金山会员首页</a></div>
+					<div id="webSiteLinks"><a href="http://vip.ijinshan.com/" target="_blank">金山会员官网首页</a><a href="http://vip.ijinshan.com/activity" target="_blank">会员活动</a></div>
 					
 					<!--<div class="setPanel">
 						<label><input type="checkbox" checked="checked" /><span>自动领取所有金米</span></label>
@@ -25,6 +25,10 @@ $arr['html']=<<<"EOT"
 						<div class="jmState">
 							<div class="jmSign"><button class="sendBtn">立即签到赚金米</button></div>
 						</div>
+					</div>
+					
+					<div class="vippage">
+						<iframe src="http://vip.ijinshan.com/" frameborder="0" scrolling="yes" width="100%" height="100%"></iframe>
 					</div>
 					
 					<!--<div class="getJinMi" id="JQ_jm1">

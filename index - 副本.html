@@ -1,0 +1,864 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>大猴的浏览器首页</title>
+<link href="style.css" rel="stylesheet" type="text/css">
+<script src="js/jquery-1.8.2.min.js"></script>
+</head>
+
+<body>
+<div class="header w">大猴的浏览器首页</div>
+<div class="main w">
+	<div class="lt" id="ltList">
+		<div class="contain">
+			<h1>事务列表<span>当前<em id="waitdonum">0</em>个待办</span></h1>
+			<ul id="workslist">
+				<!--<li>
+					<em class="prompt">提醒</em>
+					<a href="#" onClick="return false;">网站空间延期</a>
+				</li>
+				<li>
+					<a href="#" onClick="return false;">YY365互动</a>
+				</li>
+				<li>
+					<a href="#" onClick="return false;">PC蛋蛋商家问答</a>
+				</li>
+				<li>
+					<em class="prompt">提醒</em>
+					<span class="manager" title="删除本项事务" onClick="doC2(this.parentNode);">-</span>
+					<a href="#" onClick="return false;">其他测试试试事务</a>
+				</li>
+				<li>
+					<span class="manager" title="删除本项事务" onClick="doC2(this.parentNode);">-</span>
+					<a href="#" onClick="return false;">其他测试试试事务</a>
+				</li>
+				<li>
+					<span class="manager" title="删除本项事务" onClick="doC2(this.parentNode);">-</span>
+					<a href="#" onClick="return false;">其他测试试试事务</a>
+				</li>
+				<li>
+					<span class="manager" title="删除本项事务" onClick="doC2(this.parentNode);">-</span>
+					<a href="#" onClick="return false;">其他测试试试事务</a>
+				</li>
+				<li>
+					<em class="prompt">提醒</em>
+					<span class="manager" title="删除本项事务" onClick="doC2(this.parentNode);">-</span>
+					<a href="#" onClick="return false;">其他测试试试事务</a>
+				</li>
+				<li>
+					<span class="manager">
+						<a href="#" title="编辑事务" class="manager-modibtn">编辑事务</a>
+						<a href="#" title="删除事务" class="manager-delbtn" onClick="doC2(this.parentNode.parentNode);">删除事务</a>
+					</span>
+					<a href="#" onClick="return false;">其他测试试试事务12345678910000</a>
+				</li>
+				<li>
+					<em class="prompt">提醒</em>
+					<span class="manager" title="删除本项事务" onClick="doC2(this.parentNode);">-</span>
+					<a href="#" onClick="return false;">其他测试试试事务</a>
+				</li>
+				<li class="newadd" id="test">
+					<em class="prompt">提醒</em>
+					<span class="manager" title="删除本项事务" onClick="doC2(this.parentNode);">-</span>
+					<a href="#" onClick="return false;">超级特效测试</a>
+				</li>
+				<li class="add">
+					<a href="#" onClick="return false;">+ 添加新事务</a>
+				</li>-->
+			</ul>
+		</div>
+		<div class="wkctpanel">
+			<div class="ctcontain">
+			<a href="javascript:void(0);" class="ctbtn"><span class="addnew">+ 添加事务</span></a>
+			<a href="#" class="ctbtn"><span class="showall">显示全部</span></a>
+			<a href="javascript:void(0);" class="ctbtn" id="refreshWorksList"><span class="refresh">刷新</span></a>
+			</div>
+		</div>
+		<div class="conline" title="右缩" onClick="changeLeftList(this);"></div>
+	</div>
+	<div class="rt">
+		<ul id="workContent">
+			<li>
+				<div class="jsvip">
+					<div id="notLoggedIn">尚未登陆</div> 
+					<div id="accountInfo">尚未登录金山会员帐号，<a href="#" class="login JQ_login">[立即登录]</a></div>
+					<div id="webSiteLinks"><a href="http://vip.ijinshan.com/" target="_blank">金山会员官网首页</a><a href="http://vip.ijinshan.com/activity" target="_blank">会员活动</a></div>
+					
+					<!--<div class="setPanel">
+						<label><input type="checkbox" checked="checked" /><span>自动领取所有金米</span></label>
+					</div>-->
+					
+					<div class="getJinMi" id="JQ_jm1">
+						<h1>首页签到赚金米</h1>
+						<div class="jmState">
+							<div class="jmSign"><button class="sendBtn">立即签到赚金米</button></div>
+						</div>
+					</div>
+					
+					<div class="getJinMi" id="JQ_jm2">
+						<h1>游戏盒子签到赚金米</h1>
+						<div class="jmState">
+							<div class="jmSign"><button class="sendBtn">立即签到赚金米</button></div>
+						</div>
+					</div>
+					
+					<div class="vippage">
+						<iframe src="http://vip.ijinshan.com/" frameborder="0" scrolling="yes" width="100%" height="100%"></iframe>
+					</div>
+					
+					<!--<div class="getJinMi" id="JQ_jm1">
+						<h1>首页签到赚金米</h1>
+						<div class="jmState" data-state="done">
+							<div class="jmSign"><button class="sendBtn">立即签到赚金米</button></div>
+							<!--<div class="jmScore"><p>20金米</p><p>今日已签到</p></div>-->
+						<!--</div>
+					</div>
+					
+					<div class="getJinMi" id="JQ_jm2" data-state="done">
+						<h1>游戏盒子签到赚金米</h1>
+						<div class="jmState">
+							<div class="jmScore">
+								<div class="signedScore">+20 金米</div>
+								<div class="signedText"><span>今日已签到</span></div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="getJinMi">
+						<h1>游戏盒子签到赚金米</h1>
+						<div class="jmState" data-state="done">
+							<div class="signing"><span>正在签到中...</span></div>
+						</div>
+					</div>-->
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="footer">
+	<div class="verbox">
+		<div class="list">
+			<ul>
+				<li>
+					<strong>继续...</strong>
+					<div class="time">2012-06-03</div>
+					<div class="c">继续完善YY365结构，完成PC蛋蛋商家问答结构，完成左侧列表的伸缩功能。</div>
+				</li>
+				<li>
+					<strong>无题...</strong>
+					<div class="time">2012-06-02</div>
+					<div class="c">浮动提示泡泡调整美化、通用内容页、YY365....</div>
+				</li>
+				<li>
+					<strong>儿童节快乐，补上昨日更新记录</strong>
+					<div class="time">2012-06-01</div>
+					<div class="c">今日休息，下载安装试用Windows 8 Release Preview。</div>
+				</li>
+				<li>
+					<strong>按钮美化、对话框、浮动提示泡泡</strong>
+					<div class="time">2012-05-31</div>
+					<div class="c">制作完成通用的对话框窗口，同时完成了通用按钮的美化；制作了浮动提示泡泡，对其他细节进行了美化增强；对功能进行了新的构思。</div>
+				</li>
+				<li>
+					<strong>调整功能构思</strong>
+					<div class="time">2012-05-30</div>
+					<div class="c">构思：调整功能，增加通过后台程序实现的YY365互动、PC蛋蛋答题等功能。可行性测试：根据新调整的构思，对相关功能的具体实现进行了可行性测试，并根据测试结果对构思进行了相应的优化调整。</div>
+				</li>
+				<li>
+					<strong>细节增强、界面美化、动画效果</strong>
+					<div class="time">2012-05-29</div>
+					<div class="c">完成页脚栏“查看更新记录”功能，完成自由伸缩列表的功能增强与外观美化，整体界面颜色调整、边角圆角化、添加动画效果（不支持IE）。</div>
+				</li>
+				<li>
+					<strong>继续结构搭建</strong>
+					<div class="time">2012-05-28</div>
+					<div class="c">完成可自由伸缩列表的设计，完成固定页脚栏。</div>
+				</li>
+				<li>
+					<strong>开工</strong>
+					<div class="time">2012-05-27</div>
+					<div class="c">开始构思，并搭建基础页面结构。</div>
+				</li>
+			</ul>
+		</div>
+		<span class="t">查看更新记录<b></b></span>
+	</div>
+	制作：大猴 dahounet
+	<span id="abc"></span>
+	<!--<button onClick="doC1();">显示</button>
+	<script>
+	function doC1(t){
+		if(!t){
+			t=document.getElementById("test");
+		}
+		t.className='newadd2';
+		var c=function(){
+			t.className=null;
+		}
+		setTimeout(c,800);
+	}
+	function doC2(t){
+		if(!t){
+			t=document.getElementById("test");
+		}
+		t.className='newadd';
+		alert(t.id);
+	}
+	</script>
+	<button onClick="doC2();">隐藏</button>-->
+	<button onClick="t3(1);">打开对话框</button>
+	<button onClick="t4(1);">打开提示信息框</button>
+</div>
+
+<div id="workTip">
+	<div class="arrow1"></div>
+	<div class="wrapper">
+		<div class="loading">加载中...</div>
+		<h1>{#这里是事务的标题#}</h1>
+		<ul>
+			<li><span>事务类型：</span>每日事务</li>
+			<li><span>执行时间：</span><div class="r"><i>2012-05-31 00:00:00</i> 至 <i>2012-09-25 17:00:00</i></div></li>
+			<li><span>完成情况：</span><a href="javascript:void(0);" class="l" title="点击查看详细完成情况"><em>50/55</em>，完成率<em>95%</em></a></li>
+			<li><span>添加时间：</span><i>2012-05-31 10:59:21</i></li>
+			<li><span>详细说明：</span><div class="r">{#详细的说明呀#ssssssssssssssssssssssssssssssssssssssssssssssssssssfffffffffffffddddddddfff}</div></li>
+			<li><b>今日待完成</b></li>
+		</ul>
+	</div>
+	<div class="arrow2"></div>
+</div>
+<!--
+<div id="dialogBox">
+	<div class="box">
+		<div class="tit"><span>{#这是标题fffffffffffff}</span></div>
+		<div class="closeBtn" title="关闭对话框" onClick="t3();">X</div>
+		<div class="con"><p>{#这是具体内容是打飞机是富士康士蓝山咖啡裸四口裸四口}</p></div>
+		<div class="btn"><span><button>确定</button><button>取消</button><input type="button" value="111111" /></span></div>
+	</div>
+</div>
+-->
+<!--
+<div id="dialogBox">
+	<div class="box">
+		<div class="tit"><span>{事务的名称} - 完成情况日志</span></div>
+		<div class="closeBtn" title="关闭对话框" onClick="t3();">X</div>
+		<div class="con">
+			<table class="worklogs">
+				<tr class="head">
+					<th>日志序号</th>
+					<th>完成时间</th>
+					<th>完成人IP</th>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>2012-09-28 22:31:25</td>
+					<td>127.241.133.206</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>2012-09-28 22:31:25</td>
+					<td>127.241.133.206</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>2012-09-28 22:31:25</td>
+					<td>127.241.133.206</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>2012-09-28 22:31:25</td>
+					<td>127.241.133.206</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>2012-09-28 22:31:25</td>
+					<td>127.241.133.206</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>2012-09-28 22:31:25</td>
+					<td>127.241.133.206</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>2012-09-28 22:31:25</td>
+					<td>127.241.133.206</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>2012-09-28 22:31:25</td>
+					<td>127.241.133.206</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>2012-09-28 22:31:25</td>
+					<td>127.241.133.206</td>
+				</tr>
+				<tr class="pgbtn">
+					<td colspan="3">
+						<div class="pgbtn-wrap">
+							<a href="#" class="tn">上一页</a>
+							<span><a href="#">1</a></span>
+							<span><a href="#">2</a></span>
+							<span class="current">3</span>
+							<span><a href="#">4</a></span>
+							<span><a href="#">5</a></span>
+							<a href="#" class="tn disabled">下一页</a>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+-->
+<!---
+<div id="dialogBox">
+	<div class="box">
+		<div class="tit"><span>PC蛋蛋登陆</span></div>
+		<div class="closeBtn" title="关闭对话框" onClick="t3();">X</div>
+		<div class="con">
+			<div class="login">
+				<form method="post">
+					<ul class="login-form">
+						<li>
+							<div class="login-form-l">用户名:</div>
+							<div class="login-form-r"><input type="text" maxlength="25" /></div>
+						</li>
+						<li>
+							<div class="login-form-l">密码:</div>
+							<div class="login-form-r"><input type="password" maxlength="15" /></div>
+						</li>
+						<li>
+							<div class="login-form-l">验证码:</div>
+							<div class="login-form-r verifyCode">
+								<input type="text" maxlength="6" />
+								<div class="veriflyCode-img">
+									<img src="http://www.pceggs.com/VerifyCode_Login.aspx?id=1024165555" title="点击更换验证码" alt="点击更换验证码" />
+								</div>
+							</div>
+						</li>
+						<li class="login-form-btn">
+							<input type="submit" value="登 陆" />
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+-->
+<div id="dialogBox" style="/*display:block; opacity:100;*/">
+	<div class="box">
+		<div class="tit"><span>PC蛋蛋登陆情况</span></div>
+		<div class="closeBtn" title="关闭对话框">X</div>
+		<div class="con">
+			<div class="login"><form method="post" id="YY365loginForm"><ul class="login-form"><li><div class="login-form-l">用户名:</div><div class="login-form-r"><input type="text" maxlength="25" name="username" /></div></li><li><div class="login-form-l">密码:</div><div class="login-form-r"><input type="password" maxlength="15" name="password" /></div></li><li><div class="login-form-l">验证码:</div><div class="login-form-r verifyCode"><input type="text" maxlength="6" name="verifycode" /><div class="veriflyCode-img"><img src="" title="点击更换验证码" alt="点击更换验证码" /></div></div></li><li class="login-form-btn"><input type="submit" value="登 陆" /></li></ul></form></div>
+		</div>
+	</div>
+</div>
+<div id="promptBox">
+	<div class="box">
+		<p>{#这是具体内容是飞机是富士康士蓝山咖啡裸四口裸四口}</p>
+		<p><span class="prompt-loading">数据加载中...</span></p>
+		<p><span class="prompt-complete">数据加载完成...</span></p>
+		<p><span class="prompt-error">数据加载出错...</span></p>
+	</div>
+</div>
+
+<!-- for IE<9 BS IE<9!!! -->
+<div class="P-forIE" style="">
+	<div class="content">
+		<div class="floater"></div>
+		<h1>抱歉，您所使用的浏览器不能正常显示本页面，请改用其他浏览器（如：IE9、谷歌浏览器、火狐浏览器等）访问。</h1>
+	</div>
+	<div class="bg"></div>
+</div>
+<script src="js/common.js"></script>
+<script>
+(function(){
+		encode = function(i, h, l, a) {
+		h = (typeof h == "undefined" ? false: h);
+		l = (typeof l == "undefined" ? false: l);
+		a = (typeof a == "undefined" ? 8 : a);
+		function j(s, p) {
+			var r = (s & 65535) + (p & 65535),
+			q = (s >> 16) + (p >> 16) + (r >> 16);
+			return (q << 16) | (r & 65535)
+		}
+		function c(q, p) {
+			return (q << p) | (q >>> (32 - p))
+		}
+		function f(u, t, p, s, q, r) {
+			return j(c(j(j(t, u), j(s, r)), q), p)
+		}
+		function e(t, v, u, s, r, p, q) {
+			return f((v & u) | ((~v) & s), t, v, r, p, q)
+		}
+		function d(t, v, u, s, r, p, q) {
+			return f((v & s) | (u & (~s)), t, v, r, p, q)
+		}
+		function b(t, v, u, s, r, p, q) {
+			return f(v ^ u ^ s, t, v, r, p, q)
+		}
+		function o(t, v, u, s, r, p, q) {
+			return f(u ^ (v | (~s)), t, v, r, p, q)
+		}
+		function m(r, t) {
+			r[t >> 5] |= 128 << ((t) % 32);
+			r[(((t + 64) >>> 9) << 4) + 14] = t;
+			var u = 1732584193,
+			y = -271733879,
+			v = -1732584194,
+			q = 271733878;
+			for (var s = 0; s < r.length; s += 16) {
+				var x = u,
+				z = y,
+				p = v,
+				w = q;
+				u = e(u, y, v, q, r[s + 0], 7, -680876936);
+				q = e(q, u, y, v, r[s + 1], 12, -389564586);
+				v = e(v, q, u, y, r[s + 2], 17, 606105819);
+				y = e(y, v, q, u, r[s + 3], 22, -1044525330);
+				u = e(u, y, v, q, r[s + 4], 7, -176418897);
+				q = e(q, u, y, v, r[s + 5], 12, 1200080426);
+				v = e(v, q, u, y, r[s + 6], 17, -1473231341);
+				y = e(y, v, q, u, r[s + 7], 22, -45705983);
+				u = e(u, y, v, q, r[s + 8], 7, 1770035416);
+				q = e(q, u, y, v, r[s + 9], 12, -1958414417);
+				v = e(v, q, u, y, r[s + 10], 17, -42063);
+				y = e(y, v, q, u, r[s + 11], 22, -1990404162);
+				u = e(u, y, v, q, r[s + 12], 7, 1804603682);
+				q = e(q, u, y, v, r[s + 13], 12, -40341101);
+				v = e(v, q, u, y, r[s + 14], 17, -1502002290);
+				y = e(y, v, q, u, r[s + 15], 22, 1236535329);
+				u = d(u, y, v, q, r[s + 1], 5, -165796510);
+				q = d(q, u, y, v, r[s + 6], 9, -1069501632);
+				v = d(v, q, u, y, r[s + 11], 14, 643717713);
+				y = d(y, v, q, u, r[s + 0], 20, -373897302);
+				u = d(u, y, v, q, r[s + 5], 5, -701558691);
+				q = d(q, u, y, v, r[s + 10], 9, 38016083);
+				v = d(v, q, u, y, r[s + 15], 14, -660478335);
+				y = d(y, v, q, u, r[s + 4], 20, -405537848);
+				u = d(u, y, v, q, r[s + 9], 5, 568446438);
+				q = d(q, u, y, v, r[s + 14], 9, -1019803690);
+				v = d(v, q, u, y, r[s + 3], 14, -187363961);
+				y = d(y, v, q, u, r[s + 8], 20, 1163531501);
+				u = d(u, y, v, q, r[s + 13], 5, -1444681467);
+				q = d(q, u, y, v, r[s + 2], 9, -51403784);
+				v = d(v, q, u, y, r[s + 7], 14, 1735328473);
+				y = d(y, v, q, u, r[s + 12], 20, -1926607734);
+				u = b(u, y, v, q, r[s + 5], 4, -378558);
+				q = b(q, u, y, v, r[s + 8], 11, -2022574463);
+				v = b(v, q, u, y, r[s + 11], 16, 1839030562);
+				y = b(y, v, q, u, r[s + 14], 23, -35309556);
+				u = b(u, y, v, q, r[s + 1], 4, -1530992060);
+				q = b(q, u, y, v, r[s + 4], 11, 1272893353);
+				v = b(v, q, u, y, r[s + 7], 16, -155497632);
+				y = b(y, v, q, u, r[s + 10], 23, -1094730640);
+				u = b(u, y, v, q, r[s + 13], 4, 681279174);
+				q = b(q, u, y, v, r[s + 0], 11, -358537222);
+				v = b(v, q, u, y, r[s + 3], 16, -722521979);
+				y = b(y, v, q, u, r[s + 6], 23, 76029189);
+				u = b(u, y, v, q, r[s + 9], 4, -640364487);
+				q = b(q, u, y, v, r[s + 12], 11, -421815835);
+				v = b(v, q, u, y, r[s + 15], 16, 530742520);
+				y = b(y, v, q, u, r[s + 2], 23, -995338651);
+				u = o(u, y, v, q, r[s + 0], 6, -198630844);
+				q = o(q, u, y, v, r[s + 7], 10, 1126891415);
+				v = o(v, q, u, y, r[s + 14], 15, -1416354905);
+				y = o(y, v, q, u, r[s + 5], 21, -57434055);
+				u = o(u, y, v, q, r[s + 12], 6, 1700485571);
+				q = o(q, u, y, v, r[s + 3], 10, -1894986606);
+				v = o(v, q, u, y, r[s + 10], 15, -1051523);
+				y = o(y, v, q, u, r[s + 1], 21, -2054922799);
+				u = o(u, y, v, q, r[s + 8], 6, 1873313359);
+				q = o(q, u, y, v, r[s + 15], 10, -30611744);
+				v = o(v, q, u, y, r[s + 6], 15, -1560198380);
+				y = o(y, v, q, u, r[s + 13], 21, 1309151649);
+				u = o(u, y, v, q, r[s + 4], 6, -145523070);
+				q = o(q, u, y, v, r[s + 11], 10, -1120210379);
+				v = o(v, q, u, y, r[s + 2], 15, 718787259);
+				y = o(y, v, q, u, r[s + 9], 21, -343485551);
+				u = j(u, x);
+				y = j(y, z);
+				v = j(v, p);
+				q = j(q, w)
+			}
+			return [u, y, v, q]
+		}
+		function g(r) {
+			var p = [],
+			q = (1 << a) - 1;
+			for (var s = 0; s < r.length * a; s += a) {
+				p[s >> 5] |= (r.charCodeAt(s / a) & q) << (s % 32)
+			}
+			return p
+		}
+		function k(p) {
+			var r = "",
+			q = (1 << a) - 1;
+			for (var s = 0; s < p.length * 32; s += a) {
+				r += String.fromCharCode((p[s >> 5] >>> (s % 32)) & q)
+			}
+			return r
+		}
+		function n(s) {
+			var p = l ? "0123456789ABCDEF": "0123456789abcdef",
+			q = "";
+			for (var r = 0; r < s.length * 4; r++) {
+				q += p.charAt((s[r >> 2] >> ((r % 4) * 8 + 4)) & 15) + p.charAt((s[r >> 2] >> ((r % 4) * 8)) & 15)
+			}
+			return q
+		}
+		return (h ? k(m(g(i), i.length * a)) : n(m(g(i), i.length * a)))
+	};
+	var firstDo=true;
+	var timer=false;
+	function getAccountInfo(callback,closemsgid){
+		$.ajax({
+			type:"GET",
+			url:"works.php?ac=dowork&wid=28&wac=getAccountInfo",
+			dataType:"json",
+			timeout:15000,
+			beforeSend: function(){
+				//
+			},
+			success:function(data,textStatus){
+				if(data.accountInfo){
+					if(typeof closemsgid!= "undefined"){
+						callback(data.accountInfo,closemsgid)
+					}else{
+						callback(data.accountInfo);
+					}
+				}else{
+					msgWindow.show({'html':'<p><span class="prompt-error">获取金山会员账户信息出错！</span></p>','time':2200,'callback':null,'level':21});
+				}
+			},
+			error:function(){
+				msgWindow.show({'html':'<p><span class="prompt-error">获取金山会员账户信息出错！</span></p>','time':2200,'callback':null,'level':21});
+			},
+			complete: function(){
+				//
+			}
+		});
+	}
+							
+	function setAccountInfo(accountInfo,closemsgid){
+		$("#accountInfo").html('登陆帐户：<span><a href="#" class="JQ_username" title="查看金山会员账户信息">'+accountInfo.username+'</a></span><a href="#" class="logout JQ_logout">[退出]</a>');
+		if(typeof closemsgid!="undefined"){
+			msgWindow.close(closemsgid);
+		}
+		$("#accountInfo span a.JQ_username").click(function(e){
+			function foundHtml(o){
+				var temp="";
+				if(o.cookiesList!=null){
+					for(i=0;i<o.cookiesList.length;i++){
+						if(o.cookiesList[i].expire){
+							temp=temp+'<li><span class="n">'+o.cookiesList[i].name+'</span><span class="e">('+o.cookiesList[i].expire+' 到期)</span><span class="v">'+o.cookiesList[i].value+'</span></li>';
+						}else{
+							temp=temp+'<li><span class="n">'+o.cookiesList[i].name+'</span><span class="e">(无到期时间)</span><span class="v">'+o.cookiesList[i].value+'</span></li>';
+						}
+					}
+				}
+				temp='<div class="login accountInfo"><ul class="login-form"><li><div class="login-form-l">用户名:</div><div class="login-form-r"><input type="text" maxlength="25" disabled="disabled" value="'+o.username+'" /></div></li><li><div class="login-form-l">cookie:</div><div class="login-form-r"><ol class="cookie-list">'+temp+'</ol></div></li></ul></div>';
+				return temp;
+			}
+			dialogWindow.show('<b>查看金山会员账户信息</b>',foundHtml(accountInfo));
+			return false;
+		});
+		$("#accountInfo a.JQ_logout").click(function(e){
+			logout();
+			return false;
+		});
+	}
+	
+	function loadverifycode(t){
+		
+		if($("#jsVIPloginForm .veriflyCode-img img").attr('src')==""){
+			$.ajax({
+				type:"GET",
+				url:"works.php?ac=dowork&wid=28&wac=retrieveRandomImg",
+				dataType:"json",
+				timeout:15000,
+				beforeSend: function(){
+					//
+				},
+				success:function(data,textStatus){
+					if(data.result==true){
+						$("#jsVIPloginForm .veriflyCode-img").css('display','block');
+						$("#jsVIPloginForm .veriflyCode-img img").attr('src',data.imgSrc);
+						$("#jsVIPloginForm .veriflyCode-img img").click(function(e){
+								loadverifycode(true);
+						});
+					}else{
+						msgWindow.show({'html':'<p><span class="prompt-error">获取金山会员验证码时出错！（程序错误代码：'+data.errorInfo.no+' ['+data.errorInfo.text+']）</span></p>','time':2200,'callback':null,'level':21});
+					}
+				},
+				error:function(){
+					msgWindow.show({'html':'<p><span class="prompt-error">获取金山会员验证码时出错！</span></p>','time':2200,'callback':null,'level':21});
+				},
+				complete: function(){
+					//
+				}
+			});
+		}else if(t==true){
+			$.ajax({
+				type:"GET",
+				url:"works.php?ac=dowork&wid=28&wac=retrieveRandomImg",
+				dataType:"json",
+				timeout:15000,
+				beforeSend: function(){
+					//
+				},
+				success:function(data,textStatus){
+					if(data.result==true){
+						$("#jsVIPloginForm .veriflyCode-img img").attr('src',data.imgSrc);
+						$("#jsVIPloginForm input[name='verifycode']").focus();
+					}else{
+						msgWindow.show({'html':'<p><span class="prompt-error">获取金山会员验证码时出错！（程序错误代码：'+data.errorInfo.no+' ['+data.errorInfo.text+']）</span></p>','time':2200,'callback':null,'level':21});
+					}
+				},
+				error:function(){
+					msgWindow.show({'html':'<p><span class="prompt-error">获取金山会员验证码时出错！</span></p>','time':2200,'callback':null,'level':21});
+				},
+				complete: function(){
+					//
+				}
+			});
+		}
+	}
+			
+	function checkStatus(){
+		function check(){
+			if(firstDo==true){
+				init();
+				firstDo=false;
+			}
+		}
+		$.ajax({
+			type:"GET",
+			url:"works.php?ac=dowork&wid=28&wac=checkStatus",
+			dataType:"json",
+			timeout:15000,
+			beforeSend: function(){
+				this.closemsgid=msgWindow.show({'html':'<p><span class="prompt-loading">检查金山会员帐号登陆状态中...</span></p>','time':8000,'callback':null,'level':10});
+			},
+			success:function(data,textStatus){
+				if(data.state==true){
+					getAccountInfo(setAccountInfo,this.closemsgid);
+					check();
+				}else if(data.state==false){
+					msgWindow.show({'html':'<p><span class="prompt-error">金山会员帐号尚未登陆，请登陆！</span></p>','time':1000,'callback':login,'level':21});
+					$("#accountInfo a.JQ_login").click(function(e){
+						login();
+						return false;
+					});
+					$("#notLoggedIn").show().next().nextAll().hide();
+				}else{
+					msgWindow.show({'html':'<p><span class="prompt-error">检查金山会员帐号登陆状态出错！（程序错误代码：'+data.errorInfo.no+' ['+data.errorInfo.text+']）</span></p>','time':2200,'callback':null,'level':21});
+				}
+			},
+			error:function(){
+				msgWindow.show({'html':'<p><span class="prompt-error">检查金山会员帐号登陆状态出错！</span></p>','time':2200,'callback':null,'level':21});
+			},
+			complete: function(){
+				//
+			}
+		})
+	}
+	
+	function logout(){
+		$.ajax({
+			type:"GET",
+			url:"works.php?ac=dowork&wid=28&wac=logout",
+			dataType:"json",
+			timeout:15000,
+			beforeSend: function(){
+				msgWindow.show({'html':'<p><span class="prompt-loading">正在退出金山会员帐号...</span></p>','time':8000,'callback':null,'level':10});
+			},
+			success:function(data,textStatus){
+				if(data.result==true){
+					msgWindow.show({'html':'<p><span class="prompt-complete">退出金山会员帐号成功！'+data.describe+'</span></p>','time':2200,'callback':null,'level':21});
+					$("#notLoggedIn").show().next().nextAll().hide();
+					$("#accountInfo").html('尚未登录金山会员帐号，<a href="#" class="login JQ_login">[立即登录]</a>');
+					clearInterval(timer);
+					$("#accountInfo a.JQ_login").click(function(e){
+						login();
+						return false;
+					});
+				}else{
+					msgWindow.show({'html':'<p><span class="prompt-error">退出金山会员帐号时出错！（程序错误代码：'+data.errorInfo.no+' ['+data.errorInfo.text+']）</span></p>','time':2200,'callback':null,'level':21});
+				}
+			},
+			error:function(){
+				msgWindow.show({'html':'<p><span class="prompt-error">退出金山会员帐号时出错！</span></p>','time':2200,'callback':null,'level':21});
+			},
+			complete: function(){
+				//
+			}
+		});
+	}
+	function login(){
+		dialogWindow.show("金山会员账户登录",'<div class="login"><form method="post" id="jsVIPloginForm"><ul class="login-form"><li><div class="login-form-l">用户名:</div><div class="login-form-r"><input type="text" maxlength="25" name="username" /></div></li><li><div class="login-form-l">密码:</div><div class="login-form-r"><input type="password" maxlength="15" name="password" /></div></li><li><div class="login-form-l">验证码:</div><div class="login-form-r verifyCode"><input type="text" maxlength="6" name="verifycode" /><div class="veriflyCode-img"><img src="" title="点击更换验证码" alt="点击更换验证码" /></div></div></li><li class="login-form-btn"><input type="submit" value="登 陆" /></li></ul></form></div>');
+		function callback(r){
+			$("#jsVIPloginForm input[name='username']").val(r.username);
+		}
+		getAccountInfo(callback);
+		
+		$("#jsVIPloginForm").submit(function(e){
+			username=$("#jsVIPloginForm input[name='username']").val();
+			password=encode($("#jsVIPloginForm input[name='password']").val());
+			vcode=$("#jsVIPloginForm input[name='verifycode']").val();
+			if(username!=""&&password!=""){
+				$.ajax({
+					type:"GET",
+					url:"works.php?ac=dowork&wid=28&wac=login&uname="+username+"&pwd="+password+"&vcode="+vcode,
+					dataType:"json",
+					timeout:15000,
+					beforeSend: function(){
+						msgWindow.show({'html':'<p><span class="prompt-loading">金山会员帐号登陆登录中...</span></p>','time':8000,'callback':null,'level':10});
+					},
+					success:function(data,textStatus){
+						if(data.result==true){
+							msgWindow.show({'html':'<p><span class="prompt-complete">登录金山会员帐号成功！帐号: '+data.username+'</span></p>','time':2200,'callback':null,'level':21});
+							firstDo=false;
+							checkStatus();
+							init();
+							dialogWindow.colse();
+						}else if(data.result==false){
+							msgWindow.show({'html':'<p><span class="prompt-error">登录金山会员失败，请检查 帐号、密码、验证码 是否均输入正确！</span></p>','time':2200,'callback':function(){loadverifycode(true);},'level':21});
+						}else{
+							msgWindow.show({'html':'<p><span class="prompt-error">登录金山会员时出错！（程序错误代码：'+data.errorInfo.no+' ['+data.errorInfo.text+']）</span></p>','time':2200,'callback':function(){loadverifycode(true);},'level':21});
+						}
+					},
+					error:function(){
+						msgWindow.show({'html':'<p><span class="prompt-error"登录金山会员时出错！</span></p>','time':2200,'callback':function(){loadverifycode(true);},'level':21});
+					},
+					complete: function(){
+						//
+					}
+				});
+			}else{
+				msgWindow.show({'html':'<p><span class="prompt-error">用户名、密码均不能为空！</span></p>','time':1400,'callback':null,'level':10});
+			}
+			return false;
+		});
+		
+		$("#jsVIPloginForm input[name='verifycode']").focus(function(e){
+			loadverifycode();
+		});
+	}
+	
+	function checkSignState(id){
+		var url;
+		if(id==1){
+			url="http://127.0.0.1/myHomePage2012/works.php?ac=dowork&wid=28&wac=opurl&urlid=0";
+		}else if(id==2){
+			url="http://127.0.0.1/myHomePage2012/works.php?ac=dowork&wid=28&wac=opurl&urlid=1";
+		}
+		$.ajax({
+			type:"GET",
+			url:url,
+			dataType:"json",
+			timeout:15000,
+			beforeSend: function(){
+				//
+			},
+			success:function(data,textStatus){
+				if(data.today==1){	//今日已完成签到
+					$("#JQ_jm"+id+" .jmState").html('<div class="jmScore signed"><div class="signedText"><span>今日已签到</span></div></div>').attr("data-state","done");
+				}else{
+					$("#JQ_jm"+id+" .jmState").html('<div class="jmSign"><button class="sendBtn">立即签到赚金米</button></div>');
+					$("#JQ_jm"+id+" .jmState button").click(function(e){
+						doSign(id);
+					});
+				}
+			},
+			error:function(){
+				msgWindow.show({'html':'<p><span class="prompt-error">获取(id:'+id+')今日签到状态时出错！</span></p>','time':2200,'callback':null,'level':21});
+			},
+			complete: function(){
+				//
+			}
+		});
+	}
+	
+	function doSign(id){
+		var url;
+		if(id==1){
+			url="http://127.0.0.1/myHomePage2012/works.php?ac=dowork&wid=28&wac=opurl&urlid=2";
+		}else if(id==2){
+			url="http://127.0.0.1/myHomePage2012/works.php?ac=dowork&wid=28&wac=opurl&urlid=3";
+		}
+		$.ajax({
+			type:"GET",
+			url:url,
+			dataType:"json",
+			timeout:15000,
+			beforeSend: function(){
+				$("#JQ_jm"+id+" .jmState").html('<div class="signing"><span>正在签到中...</span></div>');
+			},
+			success:function(data,textStatus){
+				if(typeof data.addscore !="undefined"){
+					$("#JQ_jm"+id+" .jmState").html('<div class="jmScore"><div class="signedScore">+'+data.addscore+' 金米</div><div class="signedText"><span>今日已签到</span></div></div>').attr("data-state","done");
+				}else if(data.error_code=="30001"){
+					$("#JQ_jm"+id+" .jmState").html('<div class="jmScore signed"><div class="signedText"><span>今日已签到过啦</span></div></div>').attr("data-state","done");
+				}else{
+					$("#JQ_jm"+id+" .jmState").html('<div class="jmSign"><button class="sendBtn">立即签到赚金米</button></div>');
+					$("#JQ_jm"+id+" .jmState button").click(function(e){
+						doSign(id);
+					});
+					msgWindow.show({'html':'<p><span class="prompt-error">签到时(id:'+id+')出错！</span></p>','time':2200,'callback':null,'level':21});
+				}
+			},
+			error:function(){
+				$("#JQ_jm"+id+" .jmState").html('<div class="jmSign"><button class="sendBtn">立即签到赚金米</button></div>');
+				$("#JQ_jm"+id+" .jmState button").click(function(e){
+					doSign(id);
+				});
+				msgWindow.show({'html':'<p><span class="prompt-error">签到时(id:'+id+')出错！</span></p>','time':2200,'callback':null,'level':21});
+			},
+			complete: function(){
+				workFinish();
+			}
+		});
+	}
+	
+	function workFinish(){
+		if($("#JQ_jm1 .jmState").attr("data-state")=="done" && $("#JQ_jm2 .jmState").attr("data-state")=="done"){
+			completeWork(28);
+		}
+	}
+	
+	
+	function init(){	//初始化
+		//为各按钮绑定事件
+		$("#notLoggedIn").hide().next().nextAll().show();
+		
+		checkSignState(1);
+		checkSignState(2);
+	}
+	
+	
+	
+	//入口
+	checkStatus();
+})();
+
+
+
+
+
+
+
+$(document).ready(function() {
+	//loadworkslist();
+	//setTimeout(function(){setInterval(function(){loadworkslist('auto')},8000)},10000);
+});
+$("#refreshWorksList").click(function(){
+	refreshWorksList();
+});
+</script>
+</body>
+</html>
