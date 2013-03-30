@@ -211,23 +211,24 @@ function loadworkslist(auto){
 				$("#workTip h1").empty().text(c.title);
 				var workType=new Array(null,'每日事务','一次性事务','周期性事务');
 				var li=new Array();
-				li[0]='<li><span>事务类型: </span>'+workType[c.type]+'</li>';
+				li[0]='<li><span>wid: </span>'+c.wid+'</li>';
+				li[1]='<li><span>事务类型: </span>'+workType[c.type]+'</li>';
 				if(c.stopdate!=null){
-					li[1]='<li><span>执行时间: </span><div class="r"><i>'+c.startdate+'</i> 至 <i>'+c.stopdate+'</i></div></li>';
+					li[2]='<li><span>执行时间: </span><div class="r"><i>'+c.startdate+'</i> 至 <i>'+c.stopdate+'</i></div></li>';
 				}else{
-					li[1]='<li><span>执行时间: </span><div class="r"><i>'+c.startdate+'</i> 至 <i>长期</i></div></li>';
+					li[2]='<li><span>执行时间: </span><div class="r"><i>'+c.startdate+'</i> 至 <i>长期</i></div></li>';
 				}
-				li[2]='<li><span>完成情况: </span><!--<a href="javascript:void(0);" class="l" title="点击查看详细完成情况"><em>50/55</em>，完成率<em>95%</em></a>-->(研发中...)</li>';
-				li[3]='<li><span>添加时间: </span><i>'+c.addtime+'</i></li>';
+				li[3]='<li><span>完成情况: </span><!--<a href="javascript:void(0);" class="l" title="点击查看详细完成情况"><em>50/55</em>，完成率<em>95%</em></a>-->(研发中...)</li>';
+				li[4]='<li><span>添加时间: </span><i>'+c.addtime+'</i></li>';
 				if(c.describe){
-					li[4]='<li><span>详细说明: </span><div class="r">'+c.describe+'</div></li>';
+					li[5]='<li><span>详细说明: </span><div class="r">'+c.describe+'</div></li>';
 				}else{
-					li[4]='<li><span>详细说明: </span><div class="r">(无)</div></li>';
+					li[5]='<li><span>详细说明: </span><div class="r">(无)</div></li>';
 				}
 				if($("#"+e.currentTarget.id+"").children().is("em")){
-					li[5]='<li><b>当前待完成</b></li>';
+					li[6]='<li><b>当前待完成</b></li>';
 				}else{
-					li[5]='<li><b class="ok">已完成</b></li>';
+					li[6]='<li><b class="ok">已完成</b></li>';
 				}
 				var i=0;
 				while(i<li.length){
@@ -236,7 +237,7 @@ function loadworkslist(auto){
 			}
 			var $t2=$("#workTip"),$t3=$("#"+e.currentTarget.id+"");
 			var x,y;
-			x=$t3.offset().left+30;
+			x=$t3.offset().left+70;
 			y=$t3.offset().top+$t3.height()+5;
 			//$("#abc").text($(window).height()-y);
 			if($(window).height()-y<$t2.height()+5){

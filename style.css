@@ -390,16 +390,16 @@ ol.cookie-list li .e{
 }
 
 #workTip{
-	display:none;
 	position:absolute;
-	top:135px;
-	left:240px;
+	left:-500px;
+	top:0;
 	width:260px;
 	font-size:12px;
 	z-index:50;
 	word-break:break-all;
 	opacity:0;
 	-webkit-transition:opacity .2s;
+	display:none;
 }
 #workTip.show{
 	display:block;
@@ -411,7 +411,7 @@ ol.cookie-list li .e{
 	width:13px;
 	height:13px;
 	margin-top:-7px;
-	margin-left:32px;
+	margin-left:22px;
 	border:1px solid #666666;
 	border-bottom:none;
 	border-right:none;
@@ -428,7 +428,7 @@ ol.cookie-list li .e{
 	width:13px;
 	height:13px;
 	margin-top:-7px;
-	margin-left:32px;
+	margin-left:22px;
 	border:1px solid #666666;
 	border-top:none;
 	border-left:none;
