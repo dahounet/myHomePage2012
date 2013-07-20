@@ -1035,6 +1035,13 @@ ol.cookie-list li .e{
 	font-size:12px;
 	background-color:#f7f7f7;
 	-webkit-box-shadow:none;
+	-webkit-transition:background-color,height,line-height .2s ease;
+	cursor:pointer;
+}
+.yy365 .hudong .blist li:hover{
+	background-color:#FFC;
+	height:34px;
+	line-height:34px;
 }
 .yy365 .hudong .blist li.noMiniBlogList{
 	height:120px;
@@ -1179,7 +1186,7 @@ ol.cookie-list li .e{
 	background-color:#f7f7f7;
 	-webkit-box-shadow:none;
 	overflow:visible;
-	-webkit-transition:all .2s ease-in;
+	-webkit-transition:all .2s ease;
 }
 .yy365 .hudong .clist li.replied{
 	background-color:#e2f7cd;
