@@ -472,7 +472,7 @@ $arr['js']=<<<'EOT'
 				}
 			}
 			if(f=='get'){
-				var text=$("#JQ_subjectOriginalText").text();
+				var text=encodeURIComponent($("#JQ_subjectOriginalText").text());
 				var option=getOption();
 				$.ajax({
 					type:"GET",
