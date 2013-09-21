@@ -505,7 +505,7 @@ $arr['js']=<<<'EOT'
 					}
 				});
 			}else if(f=='update'){
-				var text=$("#JQ_subjectOriginalText").text();
+				var text=encodeURIComponent($("#JQ_subjectOriginalText").text());
 				var option=getOption();
 				var selectedOption=getOption(true);
 				$.ajax({
